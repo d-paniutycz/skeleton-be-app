@@ -1,1 +1,6 @@
 /.idea/
+/var/
+/vendor/
+
+/docker-compose.*.yaml
+/.env*
