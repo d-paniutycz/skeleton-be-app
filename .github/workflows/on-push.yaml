@@ -1,0 +1,28 @@
+name: On push
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - production
+  pull_request:
+
+jobs:
+  perform-tests:
+    name: Tests
+    permissions:
+      contents: read
+      packages: read
+    uses: ./.github/workflows/perform-tests.yaml
+
+  prepare-release:
+    name: Release
+    needs: perform-tests
+    if: github.event_name == 'push' && (github.ref_name == 'staging' || github.ref_name == 'production')
+    permissions:
+      contents: write
+      packages: write
+    uses: ./.github/workflows/prepare-release.yaml
+    with:
+      prerelease: ${{ github.ref_name != 'production' }}

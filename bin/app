@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+declare BASE_DIR=$(dirname "$0")
+source "$BASE_DIR/source/basic.sh"
+
+usage() {
+  cat << EOF
+Usage: $(basename "$0") [--help] [--verbose] <command>
+
+Application manager. This script should be run from the container.
+
+Available options:
+  -h, --help        Print this help message and exit.
+
+Available commands:
+  init              Initialize application subsystems.
+  exec              Execute commands on application trough Symfony.
+  test              Perform tests on application.
+EOF
+}
+
+setup() {
+  local script
+  local args=("$@")
+
+  case "${args[0]-}" in
+    -h | --help) usage && exit;;
+    "init") script="$BASE_DIR/source/app/init.sh" ;;
+    "exec") script="$APP_HOME_DIR/$APP_GATEWAY_CLI" ;;
+    "test") script="$BASE_DIR/source/app/test.sh" ;;
+    "") die "Missing command." ;;
+    *) die "Unknown command: ${args[0]}" ;;
+  esac
+
+  eval "$script ${args[@]:1}"
+}
+
+setup "$@"

@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+
+  web:
+    environment:
+      NGINX_WORKER_PROCESSES: 1
+    restart: on-failure
+    deploy:
+      mode: global
+
+  php-ini:
+    command: sh -c "bin/app init doctrine"
+    restart: 'no'
+    deploy:
+      mode: global
+
+  php:
+    restart: on-failure
+    deploy:
+      mode: replicated
+      replicas: 1

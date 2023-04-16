@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+
+  php-ini:
+    command: sh -c "bin/app init composer symfony doctrine"
+    volumes:
+      - .:${APP_HOME_DIR}
+    depends_on:
+      dms-pg1:
+        condition: service_started
+    restart: 'no'
+    deploy:
+      mode: global
+
+  php:
+    volumes:
+      - .:${APP_HOME_DIR}
+    restart: 'no'
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  # local mock
+  dms-pg1:
+    restart: 'no'
+    deploy:
+      mode: global

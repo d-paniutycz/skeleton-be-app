@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+declare BASE_DIR=$(dirname "$0")
+source "$BASE_DIR/source/basic.sh"
+
+usage() {
+  cat << EOF
+Usage: $(basename "$0") [--help] [--verbose] <command>
+
+Environment manager. This script should be run from the host.
+
+Available options:
+  -h, --help        Print this help message and exit.
+
+Available commands:
+  copy              Copy environment configuration files.
+  exec              Execute commands on environment trough Compose.
+EOF
+}
+
+setup() {
+  local script
+  local args=("$@")
+
+  case "${args[0]-}" in
+    -h | --help) usage && exit;;
+    "copy") script="$BASE_DIR/source/env/copy.sh" ;;
+    "exec") script="$BASE_DIR/source/env/exec.sh" ;;
+    "") die "Missing command." ;;
+    *) die "Unknown command: ${args[0]}" ;;
+  esac
+
+  eval "$script" "${args[@]:1}"
+}
+
+setup "$@"
