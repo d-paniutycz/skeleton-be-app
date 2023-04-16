@@ -1,0 +1,24 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    http_method_override: false
+    handle_all_throwables: true
+
+    enabled_locales: ['en']
+
+    php_errors:
+        log: true
+
+    router:
+        utf8: true
+
+    validation:
+        email_validation_mode: html5
+
+when@tst:
+    framework:
+        test: true
+
+when@prd:
+    framework:
+        router:
+            strict_requirements: null

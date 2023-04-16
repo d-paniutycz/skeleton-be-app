@@ -1,0 +1,33 @@
+framework:
+    messenger:
+        default_bus: command.bus
+        buses:
+            command.bus:
+                middleware:
+                    - doctrine_transaction
+
+            query.bus: ~
+
+            event.bus:
+                default_middleware:
+                    allow_no_handlers: true
+                middleware:
+                    - doctrine_transaction
+
+        transports:
+            async:
+                dsn: 'doctrine://pg1_pri'
+                options:
+                    table_name: '_sys_messenger_async'
+
+            sync: 'sync://'
+
+        routing:
+            # Interface routing
+            Sys\Application\Messenger\Message\Flag\AsyncMessage: async
+
+when@tst:
+    framework:
+        messenger:
+            transports:
+                async: 'sync://'

@@ -1,0 +1,157 @@
+name: Perform tests
+run-name: Perform tests (${{ github.ref_name }})
+
+on:
+  workflow_call:
+    inputs:
+      test_env:
+        type: string
+        default: tst
+        required: false
+      test_runner:
+        type: string
+        default: php
+        required: false
+      test_quality:
+        type: boolean
+        default: true
+        required: false
+      test_code:
+        type: boolean
+        default: true
+        required: false
+      fail_fast:
+        type: boolean
+        default: false
+        required: false
+  workflow_dispatch:
+    inputs:
+      test_env:
+        type: choice
+        options:
+          - dev
+          - tst
+        default: tst
+        required: true
+        description: Test environment
+      test_runner:
+        type: choice
+        options:
+          - php
+        required: true
+        description: Test running service
+      test_quality:
+        type: boolean
+        default: false
+        required: true
+        description: Test quality
+      test_code:
+        type: boolean
+        default: false
+        required: true
+        description: Test code
+      fail_fast:
+        type: boolean
+        default: true
+        required: true
+        description: Fail fast
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  test-quality:
+    name: Test quality
+    runs-on: ubuntu-latest
+    if: ${{ inputs.test_quality }}
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      -
+        name: Login registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Checkout repository
+        uses: actions/checkout@v3
+      -
+        id: app-set-up
+        name: Set up application
+        run: |
+          bin/env copy --main ${{ inputs.test_env }}
+          bin/env exec up ${{ inputs.test_env }}
+          echo "TEST_RUNNER_ID=$(docker compose ps --quiet ${{ inputs.test_runner }})" >> $GITHUB_ENV
+      -
+        name: Compose debug
+        run: |
+          echo "Test runner id: ${{ env.TEST_RUNNER_ID }}"
+          docker ps
+      -
+        name: Test quality (phpcs)
+        if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
+        run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test phpcs
+      -
+        name: Test quality (phpmd)
+        if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
+        run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test phpmd
+      -
+        name: Test quality (psalm)
+        if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
+        run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test psalm
+      -
+        name: Test quality (phpstan)
+        if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
+        run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test phpstan
+      -
+        name: Post Set up application
+        if: always() && steps.app-set-up.outcome == 'success'
+        run: bin/env exec down ${{ inputs.test_env }}
+
+  test-code:
+    name: Test code
+    runs-on: ubuntu-latest
+    if: ${{ inputs.test_code }}
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      -
+        name: Login registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Checkout repository
+        uses: actions/checkout@v3
+      -
+        id: app-set-up
+        name: Set up application
+        run: |
+          bin/env copy --main ${{ inputs.test_env }}
+          bin/env exec up ${{ inputs.test_env }}
+          echo "TEST_RUNNER_ID=$(docker compose ps --quiet ${{ inputs.test_runner }})" >> $GITHUB_ENV
+      -
+        name: Compose debug
+        run: |
+          echo "Test runner id: ${{ env.TEST_RUNNER_ID }}"
+          docker ps
+      -
+        name: Test code (phpunit)
+        if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
+        run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test phpunit
+      -
+        name: Test code (coverage)
+        if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
+        run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test coverage
+      -
+        name: Post Set up application
+        if: always() && steps.app-set-up.outcome == 'success'
+        run: bin/env exec down ${{ inputs.test_env }}

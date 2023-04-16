@@ -1,0 +1,8 @@
+parameters:
+	level: 8
+	checkGenericClassInNonGenericObjectType: false
+	paths:
+		- %currentWorkingDirectory%/src
+
+	ignoreErrors:
+		- '#Property .*\\Domain\\[^\\]+::\$[^\\]+ is never read, only written.#'
