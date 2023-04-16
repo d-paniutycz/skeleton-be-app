@@ -1,0 +1,65 @@
+doctrine:
+    dbal:
+        default_connection: pg1_rep
+        connections:
+            pg1_pri:
+                dbname:         '%env(string:DMS_PG1_DATABASE)%'
+                user:           '%env(string:DMS_PG1_PRI_USERNAME)%'
+                password:       '%env(string:DMS_PG1_PRI_PASSWORD)%'
+                host:           '%env(string:DMS_PG1_PRI_HOST)%'
+                port:           '%env(string:DMS_PG1_PRI_PORT)%'
+                server_version: '%env(string:DMS_PG1_VERSION)%'
+                driver:         'pdo_pgsql'
+            pg1_rep:
+                dbname:         '%env(string:DMS_PG1_DATABASE)%'
+                user:           '%env(string:DMS_PG1_REP_USERNAME)%'
+                password:       '%env(string:DMS_PG1_REP_PASSWORD)%'
+                host:           '%env(string:DMS_PG1_REP_HOST)%'
+                port:           '%env(string:DMS_PG1_REP_PORT)%'
+                server_version: '%env(string:DMS_PG1_VERSION)%'
+                driver:         'pdo_pgsql'
+
+    orm:
+        default_entity_manager: default
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        entity_managers:
+            default:
+                connection: pg1_pri
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                auto_mapping: true
+                mappings:
+                    App:
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/App'
+                        prefix: 'App'
+                        alias: App
+
+doctrine_migrations:
+    em: default
+    enable_profiler: false
+    migrations_paths:
+        'DoctrineMigration': '%kernel.project_dir%/etc/migration'
+    storage:
+        table_storage:
+            table_name: '_sys_doctrine_migration'
+
+when@prd:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system
