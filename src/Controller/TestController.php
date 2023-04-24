@@ -11,9 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[AsController]
 class TestController
 {
-    #[Route(path: '/test')]
+    #[Route(path: '/who-are-you')]
     public function test(): JsonResponse
     {
-        return new JsonResponse('ok');
+        return new JsonResponse([
+            'project' => getenv('COMPOSE_PROJECT_NAME'),
+            'release' => getenv('APP_RELEASE'),
+            'environment' => getenv('APP_ENV'),
+        ]);
     }
 }
