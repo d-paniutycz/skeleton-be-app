@@ -102,7 +102,7 @@ jobs:
           export APP_RELEASE=${{ env.RELEASE_TAG }}
 
           bin/env copy --output=assets stg
-          envsubst < assets/.env.stg | tee assets/.env.stg > /dev/null
+          envsubst '${APP_RELEASE}' < assets/.env.stg | tee assets/.env.stg > /dev/null
 
           cp docker-compose.yaml assets/
       -
