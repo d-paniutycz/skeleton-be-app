@@ -22,6 +22,8 @@ services:
         condition: service_started
     ports:
       - '${APP_PHP_PORT}:${APP_PHP_PORT}'
+    networks:
+      - default
 
   php-ini:
     image: ${APP_PHP_IMG_URI}:${APP_PHP_IMG_TAG}
@@ -31,6 +33,9 @@ services:
       APP_SECRET: ${APP_SECRET}
       DMS_PG1_PRI_PASSWORD: ${DMS_PG1_PRI_PASSWORD}
       DMS_PG1_REP_PASSWORD: ${DMS_PG1_REP_PASSWORD}
+    networks:
+      - default
+      - net-be-dms
 
   php:
     profiles: ['dev', 'tst', 'stg']
@@ -41,10 +46,18 @@ services:
         condition: service_completed_successfully
 
   # local mock
-  dms-pg1:
+  pg1:
     profiles: ['dev', 'tst']
     image: bitnami/postgresql:15.2.0-debian-11-r14
     environment:
       POSTGRES_DATABASE: ${DMS_PG1_DATABASE}
       POSTGRES_USERNAME: ${DMS_PG1_PRI_USERNAME}
       POSTGRES_PASSWORD: ${DMS_PG1_PRI_PASSWORD}
+    networks:
+      - net-be-dms
+
+networks:
+  default:
+    name: ${COMPOSE_PROJECT_NAME}
+  net-be-dms:
+    name: skeleton-${APP_ENV}-be-dms

@@ -20,3 +20,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+
+networks:
+  net-be-dms:
+    name: skeleton-stg-be-dms
+    external: true

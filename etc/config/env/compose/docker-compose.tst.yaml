@@ -7,7 +7,7 @@ services:
     volumes:
       - .:${APP_HOME_DIR}
     depends_on:
-      dms-pg1:
+      pg1:
         condition: service_started
     restart: 'no'
     deploy:
@@ -22,7 +22,7 @@ services:
       replicas: 1
 
   # local mock
-  dms-pg1:
+  pg1:
     restart: 'no'
     deploy:
       mode: global
