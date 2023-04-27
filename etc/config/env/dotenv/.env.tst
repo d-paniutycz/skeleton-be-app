@@ -26,11 +26,11 @@ DMS_PG1_VERSION=15
 # Service: dms-pg1-pri (local mock)
 DMS_PG1_PRI_HOST=pg1
 DMS_PG1_PRI_PORT=5432
-DMS_PG1_PRI_USERNAME=skeleton-pri
+DMS_PG1_PRI_USERNAME=postgres
 DMS_PG1_PRI_PASSWORD=secret
 
 # Service: dms-pg1-rep (local mock)
 DMS_PG1_REP_HOST=pg1
 DMS_PG1_REP_PORT=5432
-DMS_PG1_REP_USERNAME=skeleton-rep
+DMS_PG1_REP_USERNAME=postgres_read_only
 DMS_PG1_REP_PASSWORD=secret

@@ -33,8 +33,11 @@ doctrine:
 
 doctrine_migrations:
     migrations_paths:
-        'DoctrineMigrations': '%kernel.project_dir%/etc/migration'
+        'DoctrineMigration': '%kernel.project_dir%/etc/migration'
     enable_profiler: false
+    storage:
+        table_storage:
+            table_name: '_sys_doctrine_migration'
 
 when@prod:
     doctrine:

@@ -91,7 +91,7 @@ init_symfony() {
 }
 
 init_doctrine() {
-  bin/app exec doctrine:migrations:migrate
+  bin/app exec --no-interaction doctrine:migrations:migrate
 
   print "Doctrine: OK"
 }
