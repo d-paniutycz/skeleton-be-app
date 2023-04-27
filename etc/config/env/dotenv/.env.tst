@@ -21,6 +21,7 @@ APP_PHP_IMG_TAG=1.2
 
 # Service: dms-pg1
 DMS_PG1_DATABASE=skeleton
+DMS_PG1_VERSION=15
 
 # Service: dms-pg1-pri (local mock)
 DMS_PG1_PRI_HOST=pg1

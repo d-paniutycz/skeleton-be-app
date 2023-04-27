@@ -91,6 +91,8 @@ init_symfony() {
 }
 
 init_doctrine() {
+  bin/app exec doctrine:migrations:migrate
+
   print "Doctrine: OK"
 }
 

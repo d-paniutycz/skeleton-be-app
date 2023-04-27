@@ -15,7 +15,7 @@ services:
       - .:${APP_HOME_DIR}
     depends_on:
       pg1:
-        condition: service_started
+        condition: service_healthy
     restart: 'no'
     deploy:
       mode: global

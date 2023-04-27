@@ -31,7 +31,7 @@ class TestController
             'app_env' => $this->parameterBag->get('app_env'),
             'app_name' => $this->parameterBag->get('app_name'),
             'app_release' => $this->parameterBag->get('app_release'),
-            'dms_pg1_status' => $this->ping('pg1') ? "I'm okay" : "Need help!",
+            'pg1_status' => $this->ping('pg1') ? "I'm okay" : "Need help!",
         ]);
     }
 }
