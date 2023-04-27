@@ -24,7 +24,7 @@ final class Version20230427134418 extends AbstractMigration
         $password = $_ENV['DMS_PG1_REP_PASSWORD'];
 
         if (!$database || !$username || !$password) {
-            throw new RuntimeException('Dupa');
+            throw new RuntimeException('Seems some env variables are missing');
         }
 
         $this->addSql("CREATE ROLE $role");

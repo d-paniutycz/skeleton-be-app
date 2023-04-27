@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,7 +29,12 @@ class TestController
 
     private function connect(string $connectionKey): bool
     {
-        return $this->managerRegistry->getConnection($connectionKey)->connect();
+        /** @var Connection $connection */
+        $connection = $this->managerRegistry->getConnection($connectionKey);
+
+        return boolval(
+            $connection->executeQuery('SELECT 1')->columnCount()
+        );
     }
 
     #[Route(path: '/who-are-you')]
