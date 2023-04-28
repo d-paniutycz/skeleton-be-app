@@ -9,7 +9,6 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-
     protected function getConfigDir(): string
     {
         return $this->getProjectDir() . '/etc/config/app/symfony';

@@ -17,7 +17,7 @@ APP_GATEWAY_CLI=etc/gateway/cli.php
 APP_PHP_HOST=php
 APP_PHP_PORT=80
 APP_PHP_IMG_URI=ghcr.io/d-paniutycz/skeleton-docker/be/app/php/tech
-APP_PHP_IMG_TAG=1.2
+APP_PHP_IMG_TAG=1.3
 
 # Service: dms-pg1
 DMS_PG1_DATABASE=skeleton

@@ -12,7 +12,7 @@ services:
 
   web:
     profiles: ['dev', 'stg']
-    image: ghcr.io/d-paniutycz/skeleton-docker/be/app/web:1.1
+    image: ghcr.io/d-paniutycz/skeleton-docker/be/app/web:1.2
     environment:
       <<: *env-app-shared
       APP_PHP_HOST: ${APP_PHP_HOST}
@@ -38,7 +38,6 @@ services:
       - net-be-dms
 
   php:
-    profiles: ['dev', 'tst', 'stg']
     extends:
       service: php-ini
     depends_on:
