@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Client\Port\Api\Message\Command;
 
-use App\Client\Domain\Client\ClientId;
-use App\Client\Domain\Client\ClientName;
+use App\Client\Domain\Value\ClientId;
+use App\Client\Domain\Value\ClientName;
 use Sys\Cqrs\Application\Message\CommandMessage;
 
-class ClientCreateCommand implements CommandMessage
+readonly class ClientCreateCommand implements CommandMessage
 {
     public function __construct(
-        public readonly ClientId $clientId,
-        public readonly ClientName $clientName,
+        public ClientId $clientId,
+        public ClientName $clientName,
     ) {
     }
 }

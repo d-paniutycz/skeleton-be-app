@@ -18,8 +18,16 @@ framework:
     php_errors:
         log: true
 
-when@test:
+    router:
+        utf8: true
+
+when@tst:
     framework:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+
+when@prd:
+    framework:
+        router:
+            strict_requirements: null

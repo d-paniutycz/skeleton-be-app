@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Client\Application\Dto;
 
-use App\Client\Domain\Client\ClientId;
-use App\Client\Domain\Client\ClientName;
+use App\Client\Domain\Value\ClientId;
+use App\Client\Domain\Value\ClientName;
 
 readonly class ClientDto
 {

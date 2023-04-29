@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Client\Port\Web\Rest;
 
-use App\Client\Domain\Client\ClientId;
-use App\Client\Domain\Client\ClientName;
+use App\Client\Application\Dto\ClientDto;
+use App\Client\Domain\Value\ClientId;
+use App\Client\Domain\Value\ClientName;
 use App\Client\Port\Api\Message\Command\ClientCreateCommand;
 use App\Client\Port\Api\Message\Query\ClientReadQuery;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,20 +19,12 @@ use Sys\Cqrs\Application\Bus\CommandBus;
 use Sys\Cqrs\Application\Bus\QueryBus;
 
 #[AsController]
-class ClientController
+readonly class ClientController
 {
     public function __construct(
-        private readonly CommandBus $commandBus,
-        private readonly QueryBus $queryBus,
+        private CommandBus $commandBus,
+        private QueryBus $queryBus,
     ) {
-    }
-
-    private function serialize(mixed $object): array
-    {
-        $normalizers = [new PropertyNormalizer()];
-        $serializer = new Serializer($normalizers, []);
-
-        return $serializer->normalize($object);
     }
 
     #[Route(path: '/client', methods: [Request::METHOD_POST])]
@@ -48,26 +41,30 @@ class ClientController
             )
         );
 
-        $result = $this->queryBus->dispatch(
+        /** @var ClientDto $dto */
+        $dto = $this->queryBus->dispatch(
             new ClientReadQuery($clientId)
         );
 
-        return new JsonResponse(
-            $this->serialize($result)
-        );
+        return new JsonResponse([
+            'clientId' => $dto->clientId,
+            'clientName' => $dto->clientName,
+        ]);
     }
 
     #[Route(path: '/client', methods: [Request::METHOD_GET])]
     public function read(): JsonResponse
     {
-        $result = $this->queryBus->dispatch(
+        /** @var ClientDto $dto */
+        $dto = $this->queryBus->dispatch(
             new ClientReadQuery(
                 new ClientId('test_id'),
             )
         );
 
-        return new JsonResponse(
-            $this->serialize($result)
-        );
+        return new JsonResponse([
+            'clientId' => $dto->clientId,
+            'clientName' => $dto->clientName,
+        ]);
     }
 }

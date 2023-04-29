@@ -6,26 +6,25 @@ namespace App\Client\Infrastructure\Persistence;
 
 use App\Client\Application\Dto\ClientDto;
 use App\Client\Application\Repository\ClientReadRepository;
-use App\Client\Domain\Client\ClientId;
-use App\Client\Domain\Client\ClientName;
+use App\Client\Domain\Value\ClientId;
+use App\Client\Domain\Value\ClientName;
 use Doctrine\DBAL\Connection;
-use Doctrine\Persistence\ManagerRegistry;
 
-class DoctrineClientReadRepository implements ClientReadRepository
+readonly class DoctrineClientReadRepository implements ClientReadRepository
 {
-    private readonly Connection $connection;
-
     public function __construct(
-        ManagerRegistry $managerRegistry,
+        private Connection $connection,
     ) {
-        $this->connection = $managerRegistry->getConnection('dms_pg1_pri');
     }
 
+    /**
+     * @param array<string, mixed> $row
+     */
     private function recreateFromRow(array $row): ClientDto
     {
         return new ClientDto(
-            new ClientId($row['client_id_value']),
-            new ClientName($row['client_name_value']),
+            new ClientId((string) $row['client_id_value']),
+            new ClientName((string) $row['client_name_value']),
         );
     }
 
