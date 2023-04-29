@@ -8,9 +8,11 @@
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <!-- readonly class spec is currently unsupported, however the fix for this sniff is on PR -->
+        <exclude name="PSR1.Files.SideEffects"/>
+    </rule>
 
     <file>src/</file>
     <file>tests/</file>
-
 </ruleset>

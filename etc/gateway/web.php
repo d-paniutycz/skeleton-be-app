@@ -1,6 +1,6 @@
 <?php
 
-use App\Kernel;
+use Sys\Framework\Infrastructure\Kernel;
 
 $_ENV['APP_RUNTIME_OPTIONS'] = [
     'dotenv_path' => 'etc/config/env/dotenv/.env.' . $_ENV['APP_ENV'],
