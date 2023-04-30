@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Client\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sys\Framework\Domain\Value\UniqueStringValue;
+use Sys\Domain\Value\UniqueStringValue;
 
 #[ORM\Embeddable]
 final class ClientId extends UniqueStringValue

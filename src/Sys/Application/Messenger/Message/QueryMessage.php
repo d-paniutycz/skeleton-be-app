@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Cqrs\Application\Message;
+namespace Sys\Application\Messenger\Message;
 
 interface QueryMessage
 {

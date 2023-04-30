@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Sys\Cqrs\Application\Bus;
+namespace Sys\Application\Messenger\Bus;
 
-use Sys\Cqrs\Application\Message\CommandMessage;
+use Sys\Application\Messenger\Message\CommandMessage;
 
 interface CommandBus
 {

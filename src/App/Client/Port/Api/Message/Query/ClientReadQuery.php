@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Client\Port\Api\Message\Query;
 
 use App\Client\Domain\Value\ClientId;
-use Sys\Cqrs\Application\Message\QueryMessage;
+use Sys\Application\Messenger\Message\QueryMessage;
 
 readonly class ClientReadQuery implements QueryMessage
 {

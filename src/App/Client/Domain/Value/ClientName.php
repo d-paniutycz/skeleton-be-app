@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Client\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sys\Framework\Domain\Value\StringValue;
+use Sys\Domain\Value\StringValue;
 
 #[ORM\Embeddable]
 final class ClientName extends StringValue

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Framework\Domain\Value;
+namespace Sys\Domain\Value;
 
 use JsonSerializable;
 

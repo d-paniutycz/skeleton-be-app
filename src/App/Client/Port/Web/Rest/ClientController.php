@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sys\Cqrs\Application\Bus\CommandBus;
-use Sys\Cqrs\Application\Bus\QueryBus;
+use Sys\Application\Messenger\Bus\CommandBus;
+use Sys\Application\Messenger\Bus\QueryBus;
 
 #[AsController]
 readonly class ClientController

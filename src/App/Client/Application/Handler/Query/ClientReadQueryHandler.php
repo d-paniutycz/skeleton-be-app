@@ -7,7 +7,7 @@ namespace App\Client\Application\Handler\Query;
 use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Port\Api\Message\Query\ClientReadQuery;
 use RuntimeException;
-use Sys\Cqrs\Application\Handler\QueryHandler;
+use Sys\Application\Messenger\Handler\QueryHandler;
 
 readonly class ClientReadQueryHandler implements QueryHandler
 {

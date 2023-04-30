@@ -6,7 +6,7 @@ namespace App\Client\Port\Api\Message\Command;
 
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientName;
-use Sys\Cqrs\Application\Message\CommandMessage;
+use Sys\Application\Messenger\Message\CommandMessage;
 
 readonly class ClientCreateCommand implements CommandMessage
 {

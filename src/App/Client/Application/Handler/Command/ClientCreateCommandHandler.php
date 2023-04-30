@@ -7,7 +7,7 @@ namespace App\Client\Application\Handler\Command;
 use App\Client\Domain\Client;
 use App\Client\Domain\Repository\ClientWriteRepository;
 use App\Client\Port\Api\Message\Command\ClientCreateCommand;
-use Sys\Cqrs\Application\Handler\CommandHandler;
+use Sys\Application\Messenger\Handler\CommandHandler;
 
 readonly class ClientCreateCommandHandler implements CommandHandler
 {

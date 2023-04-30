@@ -23,9 +23,9 @@ services:
         exclude: '%kernel.project_dir%/src/Sys/Framework/Infrastructure/Kernel.php'
 
     _instanceof:
-        Sys\Cqrs\Application\Handler\CommandHandler:
+        Sys\Application\Messenger\Handler\CommandHandler:
             tags: [ { name: messenger.message_handler, bus: command } ]
-        Sys\Cqrs\Application\Handler\QueryHandler:
+        Sys\Application\Messenger\Handler\QueryHandler:
             tags: [ { name: messenger.message_handler, bus: query } ]
-        Sys\Cqrs\Application\Handler\EventHandler:
+        Sys\Application\Messenger\Handler\EventHandler:
             tags: [ { name: messenger.message_handler, bus: event } ]

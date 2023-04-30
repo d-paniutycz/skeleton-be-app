@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sys\Cqrs\Infrastructure\Messenger\Bus;
+namespace Sys\Infrastructure\Messenger\Bus;
 
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Sys\Cqrs\Application\Bus\QueryBus;
-use Sys\Cqrs\Application\Message\QueryMessage;
+use Sys\Application\Messenger\Bus\QueryBus;
+use Sys\Application\Messenger\Message\QueryMessage;
 
 readonly class MessengerQueryBus implements QueryBus
 {
