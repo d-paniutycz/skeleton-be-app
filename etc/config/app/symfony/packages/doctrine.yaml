@@ -36,7 +36,7 @@ doctrine:
                         alias: App
 
 doctrine_migrations:
-    connection: pg1_pri
+    em: default
     enable_profiler: false
     migrations_paths:
         'DoctrineMigration': '%kernel.project_dir%/etc/migration'

@@ -11,10 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class Client
 {
-    #[ORM\Embedded]
+    #[ORM\Embedded(columnPrefix: false)]
     private readonly ClientId $clientId;
 
-    #[ORM\Embedded]
+    #[ORM\Embedded(columnPrefix: false)]
     private ClientName $clientName;
 
     public function __construct(

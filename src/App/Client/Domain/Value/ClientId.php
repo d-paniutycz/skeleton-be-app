@@ -5,26 +5,11 @@ declare(strict_types=1);
 namespace App\Client\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use Stringable;
+use Sys\Framework\Domain\Value\UniqueStringValue;
 
 #[ORM\Embeddable]
-class ClientId implements Stringable
+final class ClientId extends UniqueStringValue
 {
-    #[ORM\Id, ORM\Column]
-    private readonly string $value;
-
-    public function __construct(string $value)
-    {
-        $this->value = $value;
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
+    #[ORM\Id, ORM\Column(name: 'client_id')]
+    protected string $value;
 }

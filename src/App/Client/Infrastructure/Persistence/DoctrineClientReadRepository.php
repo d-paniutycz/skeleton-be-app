@@ -23,8 +23,8 @@ readonly class DoctrineClientReadRepository implements ClientReadRepository
     private function recreateFromRow(array $row): ClientDto
     {
         return new ClientDto(
-            new ClientId((string) $row['client_id_value']),
-            new ClientName((string) $row['client_name_value']),
+            new ClientId((string) $row['client_id']),
+            new ClientName((string) $row['client_name']),
         );
     }
 
@@ -33,8 +33,8 @@ readonly class DoctrineClientReadRepository implements ClientReadRepository
         $builder = $this->connection->createQueryBuilder()
             ->select('c.*')
             ->from('client', 'c')
-            ->where('c.client_id_value = :id')
-            ->setParameter('id', $clientId);
+            ->where('c.client_id = :clientId')
+            ->setParameter('clientId', $clientId);
 
         $result = $builder->fetchAssociative();
 

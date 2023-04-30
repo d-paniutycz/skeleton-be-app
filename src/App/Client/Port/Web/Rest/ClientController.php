@@ -13,8 +13,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Sys\Cqrs\Application\Bus\CommandBus;
 use Sys\Cqrs\Application\Bus\QueryBus;
 
@@ -30,9 +28,7 @@ readonly class ClientController
     #[Route(path: '/client', methods: [Request::METHOD_POST])]
     public function create(): JsonResponse
     {
-        $clientId = new ClientId(
-            'test_' . rand(0, 10000)
-        );
+        $clientId = ClientId::generate();
 
         $this->commandBus->dispatch(
             new ClientCreateCommand(
@@ -46,10 +42,7 @@ readonly class ClientController
             new ClientReadQuery($clientId)
         );
 
-        return new JsonResponse([
-            'clientId' => $dto->clientId,
-            'clientName' => $dto->clientName,
-        ]);
+        return new JsonResponse($dto);
     }
 
     #[Route(path: '/client', methods: [Request::METHOD_GET])]
@@ -62,9 +55,6 @@ readonly class ClientController
             )
         );
 
-        return new JsonResponse([
-            'clientId' => $dto->clientId,
-            'clientName' => $dto->clientName,
-        ]);
+        return new JsonResponse($dto);
     }
 }

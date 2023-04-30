@@ -9,7 +9,6 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Repository\ClientWriteRepository;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 
 readonly class DoctrineClientWriteRepository implements ClientWriteRepository
 {
