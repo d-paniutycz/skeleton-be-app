@@ -9,6 +9,8 @@ use Symfony\Component\Uid\Ulid;
 
 abstract class UniqueStringValue extends StringValue
 {
+    public const PATTERN = '[0-9A-Z]{26}';
+
     protected string $value;
 
     public static function generate(): static

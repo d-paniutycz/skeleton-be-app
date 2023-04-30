@@ -22,10 +22,18 @@ services:
         resource: '%kernel.project_dir%/src/Sys'
         exclude: '%kernel.project_dir%/src/Sys/Framework/Infrastructure/Kernel.php'
 
+    # Resolvers
+    Sys\Infrastructure\Resolver\UniqueStringValueResolver:
+        tags: [ { name: controller.argument_value_resolver, priority: 150 } ]
+
     _instanceof:
+        # Messenger handlers
         Sys\Application\Messenger\Handler\CommandHandler:
             tags: [ { name: messenger.message_handler, bus: command } ]
         Sys\Application\Messenger\Handler\QueryHandler:
             tags: [ { name: messenger.message_handler, bus: query } ]
         Sys\Application\Messenger\Handler\EventHandler:
             tags: [ { name: messenger.message_handler, bus: event } ]
+        # Controllers
+        Sys\Infrastructure\Controller\WebController:
+            tags: [ { name: controller.service_arguments } ]
