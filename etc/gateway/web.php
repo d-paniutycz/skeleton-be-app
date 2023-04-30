@@ -2,6 +2,8 @@
 
 use Sys\Infrastructure\Kernel;
 
+# @TODO: move to config dir after reworking loader in kernel class, would be good to check quality
+
 $_ENV['APP_RUNTIME_OPTIONS'] = [
     'dotenv_path' => 'etc/config/dotenv/.env.' . $_ENV['APP_ENV'],
     'prod_envs' => ['prd'],

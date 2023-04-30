@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Client\Port\Web\Rest;
+namespace App\Client\Port\Web\Api;
 
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientName;

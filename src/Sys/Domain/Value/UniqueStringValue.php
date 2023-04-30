@@ -13,7 +13,7 @@ abstract class UniqueStringValue extends StringValue
 
     protected string $value;
 
-    public static function generate(): static
+    final public static function generate(): static
     {
         return new static(
             Ulid::generate()
