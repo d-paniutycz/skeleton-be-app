@@ -1,5 +1,5 @@
 controllers:
     resource:
-        path: ../../../../src/App/
+        path: ../../../src/App/
         namespace: App\
     type: attribute

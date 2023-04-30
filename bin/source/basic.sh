@@ -3,8 +3,7 @@
 set -Eeuo pipefail
 trap cleanup SIGINT SIGTERM ERR EXIT
 
-declare ENV_CONFIG_DIR="etc/config/env"
-declare APP_CONFIG_DIR="etc/config/app"
+declare CONFIG_DIR="etc/config"
 
 declare COLOR_END="\e[0m"
 declare COLOR_RED="\e[31m"

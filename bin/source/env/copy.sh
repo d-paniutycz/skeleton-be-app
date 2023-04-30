@@ -13,7 +13,7 @@ Available options:
   -h, --help        Print this help message and exit.
   -v, --verbose     Run in verbose mode, print debug information.
   --main            Copy as the main configuration without <env> in names.
-  --input=<path>    Path to the env directory [default=CWD/$ENV_CONFIG_DIR] with configuration files.
+  --input=<path>    Path to the env directory [default=CWD/$CONFIG_DIR] with configuration files.
   --output=<path>   Path to the output directory [default=CWD] where files should be copied.
 
 Available arguments:
@@ -40,7 +40,7 @@ setup() {
   done
 
   if [[ -z "${input-}" ]]; then
-    input="${PWD}/$ENV_CONFIG_DIR"
+    input="${PWD}/$CONFIG_DIR"
   fi
 
   if [[ -z "${output-}" ]]; then

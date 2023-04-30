@@ -3,7 +3,7 @@
 use Sys\Infrastructure\Kernel;
 
 $_ENV['APP_RUNTIME_OPTIONS'] = [
-    'dotenv_path' => 'etc/config/env/dotenv/.env.' . $_ENV['APP_ENV'],
+    'dotenv_path' => 'etc/config/dotenv/.env.' . $_ENV['APP_ENV'],
     'prod_envs' => ['prd'],
     'test_envs' => ['tst'],
 ];

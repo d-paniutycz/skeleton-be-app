@@ -80,7 +80,7 @@ exec_php() {
 
 run_phpmd() {
   local binary="phpmd"
-  local config="$APP_CONFIG_DIR/test/quality/phpmd.xml"
+  local config="$CONFIG_DIR/test/quality/phpmd.xml"
 
   assert_binary_is_executable "$binary"
   assert_file_exists "$config"
@@ -90,7 +90,7 @@ run_phpmd() {
 
 run_phpcs() {
   local binary="phpcs"
-  local config="$APP_CONFIG_DIR/test/quality/phpcs.xml"
+  local config="$CONFIG_DIR/test/quality/phpcs.xml"
 
   assert_binary_is_executable "$binary"
   assert_file_exists "$config"
@@ -100,7 +100,7 @@ run_phpcs() {
 
 run_psalm() {
   local binary="psalm"
-  local config="$APP_CONFIG_DIR/test/quality/psalm.xml"
+  local config="$CONFIG_DIR/test/quality/psalm.xml"
 
   assert_binary_is_executable "$binary"
   assert_file_exists "$config"
@@ -110,7 +110,7 @@ run_psalm() {
 
 run_phpstan() {
   local binary="phpstan"
-  local config="$APP_CONFIG_DIR/test/quality/phpstan.neon"
+  local config="$CONFIG_DIR/test/quality/phpstan.neon"
 
   assert_binary_is_executable "$binary"
   assert_file_exists "$config"

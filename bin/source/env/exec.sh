@@ -12,7 +12,7 @@ Execute commands on environment trough Compose. This script should be run from t
 Available options:
   -h, --help        Print this help message and exit.
   -v, --verbose     Run in verbose mode, print debug information.
-  --input=<path>    Path to the env directory [default=CWD/$ENV_CONFIG_DIR] with configuration files.
+  --input=<path>    Path to the env directory [default=CWD/$CONFIG_DIR] with configuration files.
 
 Available commands:
   up                Up selected environment.
@@ -39,7 +39,7 @@ setup() {
   done
 
   if [[ -z "${input-}" ]]; then
-    input="${PWD}/$ENV_CONFIG_DIR"
+    input="${PWD}/$CONFIG_DIR"
   fi
 
   local args=("$@")

@@ -11,6 +11,6 @@ class Kernel extends BaseKernel
 
     protected function getConfigDir(): string
     {
-        return $this->getProjectDir() . '/etc/config/app/symfony';
+        return $this->getProjectDir() . '/etc/config/symfony';
     }
 }
