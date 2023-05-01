@@ -10,6 +10,6 @@ use Sys\Domain\Value\EmailValue;
 #[ORM\Embeddable]
 class ClientEmail extends EmailValue
 {
-    #[ORM\Column(name: 'email')]
+    #[ORM\Column(name: 'email', unique: true)]
     protected string $value;
 }

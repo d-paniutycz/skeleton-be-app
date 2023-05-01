@@ -42,4 +42,19 @@ readonly class DoctrineClientReadRepository implements ClientReadRepository
 
         return $result ? $this->recreateFromRow($result) : null;
     }
+
+    public function findIdByToken(string $token): ?ClientId
+    {
+        # @TODO: move to token repository, with correct token check ;)
+        $builder = $this->connection->createQueryBuilder()
+            ->select('c.id')
+            ->from('client', 'c')
+            ->where('c.id = :id')
+            ->setParameter('id', $token);
+
+        /** @var false|string $result */
+        $result = $builder->fetchOne();
+
+        return $result ? new ClientId($result) : null;
+    }
 }

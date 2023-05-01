@@ -8,6 +8,7 @@ use App\Client\Domain\Value\ClientEmail;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity]
 class Client

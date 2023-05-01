@@ -8,10 +8,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sys\Application\Messenger\Bus\CommandBus;
 use Sys\Application\Messenger\Bus\QueryBus;
 use Sys\Application\Messenger\Message\QueryMessage;
+use Sys\Application\Security\SystemSecurity;
 
 abstract class WebController
 {
     final public function __construct(
+        protected SystemSecurity $security,
         protected CommandBus $commandBus,
         protected QueryBus $queryBus,
     ) {
