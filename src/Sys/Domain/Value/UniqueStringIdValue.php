@@ -7,11 +7,9 @@ namespace Sys\Domain\Value;
 use Exception;
 use Symfony\Component\Uid\Ulid;
 
-abstract class UniqueStringValue extends StringValue
+abstract class UniqueStringIdValue extends StringValue
 {
     public const PATTERN = '[0-9A-Z]{26}';
-
-    protected string $value;
 
     final public static function generate(): static
     {

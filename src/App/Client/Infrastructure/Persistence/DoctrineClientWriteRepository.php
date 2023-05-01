@@ -22,10 +22,10 @@ readonly class DoctrineClientWriteRepository implements ClientWriteRepository
         $this->entityManager->persist($client);
     }
 
-    public function find(ClientId $clientId): ?Client
+    public function find(ClientId $id): ?Client
     {
         return $this->entityManager
             ->getRepository(Client::class)
-            ->find($clientId, LockMode::PESSIMISTIC_READ);
+            ->find($id, LockMode::PESSIMISTIC_READ);
     }
 }

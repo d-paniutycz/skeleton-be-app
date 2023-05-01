@@ -7,17 +7,17 @@ namespace Sys\Infrastructure\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Sys\Domain\Value\UniqueStringValue;
+use Sys\Domain\Value\UniqueStringIdValue;
 
 class UniqueStringValueResolver implements ValueResolverInterface
 {
     /**
-     * @return UniqueStringValue[]
+     * @return UniqueStringIdValue[]
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $type = $argument->getType();
-        if (is_null($type) || !is_subclass_of($type, UniqueStringValue::class)) {
+        if (is_null($type) || !is_subclass_of($type, UniqueStringIdValue::class)) {
             return [];
         }
 

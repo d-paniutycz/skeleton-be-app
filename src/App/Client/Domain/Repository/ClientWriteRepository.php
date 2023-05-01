@@ -11,5 +11,5 @@ interface ClientWriteRepository
 {
     public function persist(Client $client): void;
 
-    public function find(ClientId $clientId): ?Client;
+    public function find(ClientId $id): ?Client;
 }

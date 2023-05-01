@@ -4,39 +4,45 @@ declare(strict_types=1);
 
 namespace App\Client\Domain;
 
+use App\Client\Domain\Value\ClientEmail;
 use App\Client\Domain\Value\ClientId;
-use App\Client\Domain\Value\ClientName;
+use App\Client\Domain\Value\ClientPassword;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 class Client
 {
     #[ORM\Embedded(columnPrefix: false)]
-    private readonly ClientId $clientId;
+    private readonly ClientId $id;
 
     #[ORM\Embedded(columnPrefix: false)]
-    private ClientName $clientName;
+    private ClientEmail $email;
+
+    #[ORM\Embedded(columnPrefix: false)]
+    private ClientPassword $password;
 
     public function __construct(
-        ClientId $clientId,
-        ClientName $clientName,
+        ClientId $id,
+        ClientEmail $email,
+        ClientPassword $password,
     ) {
-        $this->clientId = $clientId;
-        $this->clientName = $clientName;
+        $this->id = $id;
+        $this->email = $email;
+        $this->password = $password;
     }
 
-    public function getClientId(): ClientId
+    public function getId(): ClientId
     {
-        return $this->clientId;
+        return $this->id;
     }
 
-    public function getClientName(): ClientName
+    public function getEmail(): ClientEmail
     {
-        return $this->clientName;
+        return $this->email;
     }
 
-    public function setClientName(ClientName $clientName): void
+    public function getPassword(): ClientPassword
     {
-        $this->clientName = $clientName;
+        return $this->password;
     }
 }

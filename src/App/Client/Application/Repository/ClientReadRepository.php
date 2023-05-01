@@ -9,5 +9,5 @@ use App\Client\Domain\Value\ClientId;
 
 interface ClientReadRepository
 {
-    public function find(ClientId $clientId): ?ClientDto;
+    public function find(ClientId $id): ?ClientDto;
 }

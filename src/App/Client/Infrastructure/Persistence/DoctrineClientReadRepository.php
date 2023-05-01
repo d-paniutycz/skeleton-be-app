@@ -6,8 +6,9 @@ namespace App\Client\Infrastructure\Persistence;
 
 use App\Client\Application\Dto\ClientDto;
 use App\Client\Application\Repository\ClientReadRepository;
+use App\Client\Domain\Value\ClientEmail;
 use App\Client\Domain\Value\ClientId;
-use App\Client\Domain\Value\ClientName;
+use App\Client\Domain\Value\ClientPassword;
 use Doctrine\DBAL\Connection;
 
 readonly class DoctrineClientReadRepository implements ClientReadRepository
@@ -23,18 +24,19 @@ readonly class DoctrineClientReadRepository implements ClientReadRepository
     private function recreateFromRow(array $row): ClientDto
     {
         return new ClientDto(
-            new ClientId((string) $row['client_id']),
-            new ClientName((string) $row['client_name']),
+            new ClientId((string) $row['id']),
+            new ClientEmail((string) $row['email']),
+            new ClientPassword((string) $row['password']),
         );
     }
 
-    public function find(ClientId $clientId): ?ClientDto
+    public function find(ClientId $id): ?ClientDto
     {
         $builder = $this->connection->createQueryBuilder()
             ->select('c.*')
             ->from('client', 'c')
-            ->where('c.client_id = :clientId')
-            ->setParameter('clientId', $clientId);
+            ->where('c.id = :id')
+            ->setParameter('id', $id);
 
         $result = $builder->fetchAssociative();
 

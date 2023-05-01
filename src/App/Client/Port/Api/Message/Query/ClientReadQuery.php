@@ -10,7 +10,7 @@ use Sys\Application\Messenger\Message\QueryMessage;
 readonly class ClientReadQuery implements QueryMessage
 {
     public function __construct(
-        public ClientId $clientId,
+        public ClientId $id,
     ) {
     }
 }

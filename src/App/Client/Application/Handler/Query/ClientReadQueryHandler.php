@@ -19,9 +19,9 @@ readonly class ClientReadQueryHandler implements QueryHandler
 
     public function __invoke(ClientReadQuery $message): ClientDto
     {
-        return $this->clientRepository->find($message->clientId)
+        return $this->clientRepository->find($message->id)
             ?? throw new RuntimeException(
-                'Client not found:' . $message->clientId->getValue()
+                'Client not found:' . $message->id
             );
     }
 }

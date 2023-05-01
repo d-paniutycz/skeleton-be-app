@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Client\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sys\Domain\Value\UniqueStringIdValue;
+use Sys\Domain\Value\HashedSecretValue;
 
 #[ORM\Embeddable]
-final class ClientId extends UniqueStringIdValue
+class ClientPassword extends HashedSecretValue
 {
-    #[ORM\Id, ORM\Column(name: 'id')]
+    #[ORM\Column(name: 'password')]
     protected string $value;
 }

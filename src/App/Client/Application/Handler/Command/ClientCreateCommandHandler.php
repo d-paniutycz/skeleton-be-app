@@ -18,7 +18,7 @@ readonly class ClientCreateCommandHandler implements CommandHandler
 
     public function __invoke(ClientCreateCommand $message): void
     {
-        $client = new Client($message->clientId, $message->clientName);
+        $client = new Client($message->id, $message->email, $message->password);
 
         $this->clientRepository->persist($client);
     }

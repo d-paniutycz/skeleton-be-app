@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Client\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sys\Domain\Value\StringValue;
+use Sys\Domain\Value\EmailValue;
 
 #[ORM\Embeddable]
-final class ClientName extends StringValue
+class ClientEmail extends EmailValue
 {
-    #[ORM\Column(name: 'client_name')]
+    #[ORM\Column(name: 'email')]
     protected string $value;
 }
