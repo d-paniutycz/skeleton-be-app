@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Sys\Domain\Value;
 
-use Exception;
 use Symfony\Component\Uid\Ulid;
+use Sys\Application\Exception\InvalidStringValueException;
 
 abstract class UniqueStringIdValue extends StringValue
 {
@@ -21,7 +21,7 @@ abstract class UniqueStringIdValue extends StringValue
     final public function __construct(string $value)
     {
         if (!Ulid::isValid($value)) {
-            throw new Exception('Invalid ULID identifier: ' . $value);
+            throw new InvalidStringValueException('Invalid ULID identifier', $value);
         }
 
         parent::__construct($value);

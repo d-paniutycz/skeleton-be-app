@@ -19,12 +19,13 @@ final class Version20230427134418 extends AbstractMigration
     {
         $role = 'read_only_role';
 
-        $database = $_ENV['DMS_PG1_DATABASE'];
-        $username = $_ENV['DMS_PG1_REP_USERNAME'];
-        $password = $_ENV['DMS_PG1_REP_PASSWORD'];
+        // env variables are loaded mostly trough dotenv, getenv() will not work as expected
+        $database = $_ENV['DMS_PG1_DATABASE'] ?? null;
+        $username = $_ENV['DMS_PG1_REP_USERNAME'] ?? null;
+        $password = $_ENV['DMS_PG1_REP_PASSWORD'] ?? null;
 
         if (!$database || !$username || !$password) {
-            throw new RuntimeException('Seems some env variables are missing');
+            throw new RuntimeException('Some env variables are missing');
         }
 
         $this->addSql("CREATE ROLE $role");
@@ -37,6 +38,7 @@ final class Version20230427134418 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        // env variables might be already changed at this point
         throw new RuntimeException('No way back');
     }
 }

@@ -16,7 +16,7 @@ services:
         resource: '%kernel.project_dir%/src/Sys'
 
     # Resolvers
-    Sys\Infrastructure\Resolver\UniqueStringValueResolver:
+    Sys\Infrastructure\Resolver\UniqueStringIdValueResolver:
         tags: [ { name: controller.argument_value_resolver, priority: 128 } ]
 
     _instanceof:

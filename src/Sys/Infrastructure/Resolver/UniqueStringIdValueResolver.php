@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Sys\Domain\Value\UniqueStringIdValue;
 
-class UniqueStringValueResolver implements ValueResolverInterface
+class UniqueStringIdValueResolver implements ValueResolverInterface
 {
     /**
      * @return UniqueStringIdValue[]
