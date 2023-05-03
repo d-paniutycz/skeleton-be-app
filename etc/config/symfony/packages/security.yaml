@@ -1,14 +1,14 @@
 security:
-    providers:
-        app_client_dto_provider:
-            id: App\Client\Infrastructure\Security\ClientDtoProvider
+#    providers:
+#        app_client_dto_provider:
+#            id: App\Client\Infrastructure\Security\ClientDtoProvider
 
     firewalls:
         main:
             lazy: true
-            provider: app_client_dto_provider
-            access_token:
-                token_handler: App\Client\Infrastructure\Security\ClientTokenHandler
+#            provider: app_client_dto_provider
+#            access_token:
+#                token_handler: App\Client\Infrastructure\Security\ClientTokenHandler
 
             # switch_user: true
 

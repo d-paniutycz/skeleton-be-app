@@ -16,7 +16,9 @@ services:
         resource: '%kernel.project_dir%/src/Sys'
 
     # Resolvers
-    Sys\Infrastructure\Resolver\UniqueStringIdValueResolver:
+    Sys\Infrastructure\Port\Web\Resolver\Value\UniqueStringIdValueResolver:
+        tags: [ { name: controller.argument_value_resolver, priority: 256 } ]
+    Sys\Infrastructure\Port\Web\Resolver\Request\RequestResolver:
         tags: [ { name: controller.argument_value_resolver, priority: 128 } ]
 
     _instanceof:
@@ -28,5 +30,5 @@ services:
         Sys\Application\Messenger\Handler\EventHandler:
             tags: [ { name: messenger.message_handler, bus: event } ]
         # Controllers
-        Sys\Infrastructure\Controller\WebController:
+        Sys\Infrastructure\Port\Web\AbstractWebController:
             tags: [ { name: controller.service_arguments } ]

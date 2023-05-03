@@ -11,7 +11,7 @@ abstract class EmailValue extends StringValue
     final public function __construct(string $value)
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidStringValueException('Email is invalid', $value);
+            throw new InvalidStringValueException('Invalid email address', $value);
         }
 
         parent::__construct($value);

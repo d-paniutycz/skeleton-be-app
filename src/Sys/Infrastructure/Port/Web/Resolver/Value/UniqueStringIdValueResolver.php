@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Infrastructure\Resolver;
+namespace Sys\Infrastructure\Port\Web\Resolver\Value;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
@@ -16,8 +16,8 @@ class UniqueStringIdValueResolver implements ValueResolverInterface
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        $type = $argument->getType();
-        if (is_null($type) || !is_subclass_of($type, UniqueStringIdValue::class)) {
+        $class = $argument->getType();
+        if (is_null($class) || !is_subclass_of($class, UniqueStringIdValue::class)) {
             return [];
         }
 
@@ -26,6 +26,6 @@ class UniqueStringIdValueResolver implements ValueResolverInterface
             $argument->getName()
         );
 
-        return is_string($value) ? [new $type($value)] : [];
+        return is_string($value) ? [new $class($value)] : [];
     }
 }
