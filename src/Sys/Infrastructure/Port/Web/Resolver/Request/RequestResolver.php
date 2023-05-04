@@ -7,10 +7,18 @@ namespace Sys\Infrastructure\Port\Web\Resolver\Request;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RequestResolver implements ValueResolverInterface
 {
+    public function __construct(
+        private readonly PropertySetter $propertySetter,
+        private readonly ValidatorInterface $validator,
+    ) {
+    }
+
     /**
      * @return Resolvable[]
      */
@@ -23,10 +31,12 @@ class RequestResolver implements ValueResolverInterface
 
         $data = $class::getStrategy()->resolve($request);
 
-        $normalizer = new PropertyNormalizer();
+        $input = $this->propertySetter->setProperties($data, $class);
 
-        /** @var Resolvable $input */
-        $input = $normalizer->denormalize($data, $class);
+        $violationList = $this->validator->validate($input);
+        if ($violationList->count() > 0) {
+            throw new ValidationFailedException($input, $violationList);
+        }
 
         return [$input];
     }

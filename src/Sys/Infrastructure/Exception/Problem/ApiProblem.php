@@ -6,6 +6,11 @@ namespace Sys\Infrastructure\Exception\Problem;
 
 final class ApiProblem
 {
+    public static function tokenizeUrn(string $value): string
+    {
+        return 'urn:guid:' . md5($value);
+    }
+
     /**
      * @param array<string, mixed> $additional
      */

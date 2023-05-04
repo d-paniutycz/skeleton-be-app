@@ -48,18 +48,11 @@ final class ApiProblemExceptionMapper
         return $reflect->getShortName();
     }
 
-    private function tokenizeType(string $value): string
-    {
-        return strtoupper(
-            substr(md5($value), 0, 6)
-        );
-    }
-
     private function getType(Throwable $exception): string
     {
         $name = $this->getClassName($exception);
 
-        return is_string($name) ? $this->tokenizeType($name) : self::DEFAULT_DESCRIPTION;
+        return is_string($name) ? ApiProblem::tokenizeUrn($name) : self::DEFAULT_DESCRIPTION;
     }
 
     private function getTitle(Throwable $exception): string

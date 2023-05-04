@@ -11,24 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ClientCreateInput implements Resolvable
 {
-    #[Assert\Type('string')]
-    public readonly mixed $email;
+    #[Assert\Email]
+    public readonly string $email;
 
-    #[Assert\Type('string')]
-    public readonly string $name;
-
-    #[Assert\Type('int')]
-    public readonly float $age;
-
-    public function __construct(
-        mixed $email,
-        string $name,
-        float $age,
-    ) {
-        $this->email = $email;
-        $this->name = $name;
-        $this->age = $age;
-    }
+    //#[Assert\Range(min: 18)]
+    #[Assert\NotNull]
+    public readonly ?int $age;
 
     public static function getStrategy(): ResolverStrategy
     {
