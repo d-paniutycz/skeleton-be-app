@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Port\Web\Resolver\Request\Strategy;
 
-use Symfony\Component\HttpFoundation\Exception\JsonException;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 class JsonContentResolverStrategy implements ResolverStrategy
@@ -17,16 +17,20 @@ class JsonContentResolverStrategy implements ResolverStrategy
     /**
      * @psalm-suppress MixedReturnStatement
      * @psalm-suppress MixedInferredReturnType
-     * @return string[]
+     * @return array<mixed>
      */
     public function resolve(Request $request): array
     {
-        try {
-            $data = $request->toArray();
-        } catch (JsonException $exception) {
-            throw $exception;
+        $data = $request->toArray();
+
+        if (!is_null($this->key)) {
+            if (array_key_exists($this->key, $data)) {
+                return $data[$this->key];
+            }
+
+            throw new Exception('wymysl cos');
         }
 
-        return is_null($this->key) ? $data : $data[$this->key] ?? [];
+        return $data;
     }
 }

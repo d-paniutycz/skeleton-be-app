@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Infrastructure\Exception;
+namespace Sys\Infrastructure\Exception\Abstract;
 
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response;

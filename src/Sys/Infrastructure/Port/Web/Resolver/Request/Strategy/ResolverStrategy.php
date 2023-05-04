@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 interface ResolverStrategy
 {
     /**
-     * @return array<mixed>
+     * @return array<string, mixed>
      */
     public function resolve(Request $request): array;
 }

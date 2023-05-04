@@ -9,14 +9,19 @@ use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\JsonContentResolverStr
 use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\ResolverStrategy;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ClientCreateInput implements Resolvable
+final class ClientCreateInput implements Resolvable
 {
     #[Assert\Email]
     public readonly string $email;
 
-    //#[Assert\Range(min: 18)]
-    #[Assert\NotNull]
-    public readonly ?int $age;
+    #[Assert\Range(min: 18)]
+    public readonly int $age;
+
+    public function __construct(string $email, int $age)
+    {
+        $this->email = $email;
+        $this->age = $age;
+    }
 
     public static function getStrategy(): ResolverStrategy
     {
