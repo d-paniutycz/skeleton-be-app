@@ -7,8 +7,8 @@ namespace Sys\Infrastructure\Port\Web\Resolver\Request;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sys\Application\Exception\InputValidationFailedException;
 
 readonly class RequestResolver implements ValueResolverInterface
 {
@@ -35,7 +35,7 @@ readonly class RequestResolver implements ValueResolverInterface
 
         $violationList = $this->validator->validate($input);
         if ($violationList->count() > 0) {
-            throw new ValidationFailedException($input, $violationList);
+            throw new InputValidationFailedException('Resolver input validation failed', $violationList);
         }
 
         return [$input];

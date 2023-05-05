@@ -16,7 +16,7 @@ services:
         resource: '%kernel.project_dir%/src/Sys'
 
     # Resolvers
-    Sys\Infrastructure\Port\Web\Resolver\Value\UniqueStringIdValueResolver:
+    Sys\Infrastructure\Port\Web\Resolver\Value\UlidValueResolver:
         tags: [ { name: controller.argument_value_resolver, priority: 256 } ]
     Sys\Infrastructure\Port\Web\Resolver\Request\RequestResolver:
         tags: [ { name: controller.argument_value_resolver, priority: 128 } ]

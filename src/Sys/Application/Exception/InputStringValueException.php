@@ -6,7 +6,7 @@ namespace Sys\Application\Exception;
 
 use Sys\Infrastructure\Exception\Abstract\ApplicationException;
 
-final class InvalidStringValueException extends ApplicationException
+final class InputStringValueException extends ApplicationException
 {
     public function __construct(
         string $message,

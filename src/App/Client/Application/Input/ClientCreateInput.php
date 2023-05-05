@@ -14,7 +14,7 @@ final class ClientCreateInput implements Resolvable
     #[Assert\Email]
     public readonly string $email;
 
-    #[Assert\Range(min: 18)]
+    #[Assert\Range(min: 16, max: 32)]
     public readonly int $age;
 
     public function __construct(string $email, int $age)

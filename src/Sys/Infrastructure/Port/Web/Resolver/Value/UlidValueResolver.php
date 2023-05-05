@@ -7,17 +7,17 @@ namespace Sys\Infrastructure\Port\Web\Resolver\Value;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use Sys\Domain\Value\UniqueStringIdValue;
+use Sys\Domain\Value\UlidValue;
 
-class UniqueStringIdValueResolver implements ValueResolverInterface
+class UlidValueResolver implements ValueResolverInterface
 {
     /**
-     * @return UniqueStringIdValue[]
+     * @return UlidValue[]
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $class = $argument->getType();
-        if (is_null($class) || !is_subclass_of($class, UniqueStringIdValue::class)) {
+        if (is_null($class) || !is_subclass_of($class, UlidValue::class)) {
             return [];
         }
 
@@ -26,6 +26,7 @@ class UniqueStringIdValueResolver implements ValueResolverInterface
             $argument->getName()
         );
 
+        // @TODO: check if can be yielded
         return is_string($value) ? [new $class($value)] : [];
     }
 }

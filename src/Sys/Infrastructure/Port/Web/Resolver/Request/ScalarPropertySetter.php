@@ -10,9 +10,9 @@ use ReflectionException;
 use ReflectionNamedType;
 use ReflectionProperty;
 use RuntimeException;
-use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
+use Sys\Application\Exception\InputValidationFailedException;
 use Sys\Infrastructure\Constraint\ConstraintViolationFactory;
 
 readonly class ScalarPropertySetter
@@ -30,6 +30,7 @@ readonly class ScalarPropertySetter
     {
         try {
             $reflect = new ReflectionClass($class);
+
             $instance = $reflect->newInstanceWithoutConstructor();
         } catch (ReflectionException $exception) {
             $template = 'Class "%s" cannot be instantiated.';
@@ -48,7 +49,7 @@ readonly class ScalarPropertySetter
         }
 
         if ($violationList->count() > 0) {
-            throw new ValidationFailedException($instance, $violationList);
+            throw new InputValidationFailedException('Setter input validation failed', $violationList);
         }
 
         return $instance;
