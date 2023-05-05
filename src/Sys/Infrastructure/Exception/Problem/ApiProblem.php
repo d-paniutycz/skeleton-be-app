@@ -6,14 +6,11 @@ namespace Sys\Infrastructure\Exception\Problem;
 
 final class ApiProblem
 {
-    public static function tokenizeUrn(string $value): string
+    public static function tokenizeType(string $value): string
     {
-        return 'urn:id:' . crc32($value);
+        return (string) crc32($value);
     }
 
-    /**
-     * @param array<string, mixed> $additional
-     */
     public function __construct(
         private readonly string $type,
         private readonly string $title,
@@ -43,9 +40,6 @@ final class ApiProblem
         return $this->status;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getAdditional(): array
     {
         return $this->additional;

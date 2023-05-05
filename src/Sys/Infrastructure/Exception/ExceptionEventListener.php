@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace Sys\Infrastructure\Exception;
 
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Sys\Infrastructure\Exception\Problem\ApiProblemResponseBuilder;
 use Throwable;
 
 #[AsEventListener]
 class ExceptionEventListener
 {
-    /**
-     * @var array<class-string>
-     */
+    /** @var class-string[] */
     private array $exceptionWhiteList = [];
 
     public function __construct(

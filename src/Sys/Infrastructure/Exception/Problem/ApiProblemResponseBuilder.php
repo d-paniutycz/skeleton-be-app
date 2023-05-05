@@ -7,7 +7,6 @@ namespace Sys\Infrastructure\Exception\Problem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Throwable;
 
@@ -19,9 +18,6 @@ readonly class ApiProblemResponseBuilder
     ) {
     }
 
-    /**
-     * @param array<string, string> $headers
-     */
     public function build(ApiProblem $apiProblem, array $headers = []): Response
     {
         $content = $this->serializer->serialize($apiProblem, 'json');

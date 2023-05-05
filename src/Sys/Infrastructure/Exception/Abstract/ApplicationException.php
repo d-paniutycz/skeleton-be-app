@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 abstract class ApplicationException extends RuntimeException implements HttpExceptionInterface
 {
-    /** @var array<string, string> */
     protected array $headers = [];
 
     public function getStatusCode(): int
@@ -18,9 +17,6 @@ abstract class ApplicationException extends RuntimeException implements HttpExce
         return Response::HTTP_BAD_REQUEST;
     }
 
-    /**
-     * @return array<string, string>
-     */
     public function getHeaders(): array
     {
         return $this->headers;
