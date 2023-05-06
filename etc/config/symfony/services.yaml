@@ -30,5 +30,5 @@ services:
         Sys\Application\Messenger\Handler\EventHandler:
             tags: [ { name: messenger.message_handler, bus: event } ]
         # Controllers
-        Sys\Infrastructure\Port\Web\AbstractWebController:
+        Sys\Infrastructure\Port\Web\WebController:
             tags: [ { name: controller.service_arguments } ]

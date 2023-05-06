@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Port\Web\Resolver\Value;
 
+use Generator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -12,7 +13,7 @@ use Sys\Domain\Value\UlidValue;
 class UlidValueResolver implements ValueResolverInterface
 {
     /**
-     * @return UlidValue[]
+     * @return Generator<int, ?UlidValue>
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
@@ -26,7 +27,6 @@ class UlidValueResolver implements ValueResolverInterface
             $argument->getName()
         );
 
-        // @TODO: check if can be yielded
-        return is_string($value) ? [new $class($value)] : [];
+        yield is_string($value) ? new $class($value) : null;
     }
 }

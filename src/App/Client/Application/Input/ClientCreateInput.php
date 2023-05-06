@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Client\Application\Input;
 
-use Sys\Infrastructure\Port\Web\Resolver\Request\Resolvable;
+use Sys\Infrastructure\Port\Web\Resolver\Request\ResolvableRequest;
 use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\JsonContentResolverStrategy;
-use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\ResolverStrategy;
+use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\RequestResolverStrategy;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class ClientCreateInput implements Resolvable
+final class ClientCreateInput implements ResolvableRequest
 {
     #[Assert\Email]
     public readonly string $email;
@@ -23,7 +23,7 @@ final class ClientCreateInput implements Resolvable
         $this->age = $age;
     }
 
-    public static function getStrategy(): ResolverStrategy
+    public static function getRequestResolver(): RequestResolverStrategy
     {
         return new JsonContentResolverStrategy();
     }

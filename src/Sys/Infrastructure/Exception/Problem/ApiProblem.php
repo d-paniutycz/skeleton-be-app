@@ -11,6 +11,9 @@ final class ApiProblem
         return (string) crc32($value);
     }
 
+    /**
+     * @param array<array-key, mixed> $additional
+     */
     public function __construct(
         private readonly string $type,
         private readonly string $title,
@@ -40,6 +43,9 @@ final class ApiProblem
         return $this->status;
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     public function getAdditional(): array
     {
         return $this->additional;

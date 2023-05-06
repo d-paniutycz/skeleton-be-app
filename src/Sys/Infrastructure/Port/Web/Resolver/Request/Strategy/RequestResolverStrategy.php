@@ -6,10 +6,10 @@ namespace Sys\Infrastructure\Port\Web\Resolver\Request\Strategy;
 
 use Symfony\Component\HttpFoundation\Request;
 
-interface ResolverStrategy
+interface RequestResolverStrategy
 {
     /**
-     * @return array<string, mixed>
+     * @return array<array-key, mixed>
      */
     public function resolve(Request $request): array;
 }

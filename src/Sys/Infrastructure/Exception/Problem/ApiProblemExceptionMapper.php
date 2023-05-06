@@ -52,7 +52,7 @@ final class ApiProblemExceptionMapper
     {
         $name = $this->getClassName($exception);
 
-        return is_string($name) ? 'urn:id' . ApiProblem::tokenizeType($name) : self::DEFAULT_DESCRIPTION;
+        return is_string($name) ? 'urn:id:' . ApiProblem::tokenizeType($name) : self::DEFAULT_DESCRIPTION;
     }
 
     private function getTitle(Throwable $exception): string
@@ -97,6 +97,9 @@ final class ApiProblemExceptionMapper
         return empty($detail) ? self::DEFAULT_DESCRIPTION : $detail;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function getAdditional(Throwable $exception): array
     {
         $list = get_object_vars($exception);

@@ -18,6 +18,9 @@ readonly class ApiProblemResponseBuilder
     ) {
     }
 
+    /**
+     * @param array<array-key, mixed> $headers
+     */
     public function build(ApiProblem $apiProblem, array $headers = []): Response
     {
         $content = $this->serializer->serialize($apiProblem, 'json');

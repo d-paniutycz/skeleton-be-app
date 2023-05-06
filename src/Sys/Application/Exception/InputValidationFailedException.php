@@ -9,6 +9,9 @@ use Sys\Infrastructure\Exception\Abstract\ApplicationException;
 
 class InputValidationFailedException extends ApplicationException
 {
+    /**
+     * @var array<array-key, mixed>
+     */
     public readonly array $violations;
 
     public function __construct(string $message, ConstraintViolationListInterface $violationList)
@@ -18,19 +21,17 @@ class InputValidationFailedException extends ApplicationException
         parent::__construct($message);
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     private function getViolations(ConstraintViolationListInterface $violationList): array
     {
         $violations = [];
         foreach ($violationList as $violation) {
-            $code = $violation->getCode();
-
             $violations[] = [
-                'type' => is_null($code) ? null : 'urn:uuid:' . $code,
-                'detail' => $violation->getMessage(),
-                'additional' => [
-                    'property' => $violation->getPropertyPath(),
-                    'value' => $violation->getInvalidValue(),
-                ],
+                'description' => $violation->getMessage(),
+                'property' => $violation->getPropertyPath(),
+                'value' => $violation->getInvalidValue(),
             ];
         }
 

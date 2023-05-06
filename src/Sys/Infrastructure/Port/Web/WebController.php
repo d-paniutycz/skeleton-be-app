@@ -7,7 +7,7 @@ namespace Sys\Infrastructure\Port\Web;
 use Sys\Application\Messenger\Bus\CommandBus;
 use Sys\Application\Messenger\Bus\QueryBus;
 
-abstract class AbstractWebController
+abstract class WebController
 {
     public function __construct(
         protected readonly CommandBus $commandBus,
