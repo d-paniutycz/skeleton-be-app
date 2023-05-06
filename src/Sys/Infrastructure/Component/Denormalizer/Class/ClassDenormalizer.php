@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Infrastructure\Component\Denormalizer;
+namespace Sys\Infrastructure\Component\Denormalizer\Class;
 
 interface ClassDenormalizer
 {
