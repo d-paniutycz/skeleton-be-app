@@ -10,7 +10,7 @@ use ReflectionException;
 use ReflectionNamedType;
 use ReflectionProperty;
 use RuntimeException;
-use Sys\Application\Exception\InputPropertyTypeException;
+use Sys\Application\Exception\Input\InputPropertyTypeException;
 
 class ScalarClassDenormalizer implements ClassDenormalizer
 {

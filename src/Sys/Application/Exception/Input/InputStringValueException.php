@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sys\Application\Exception;
+namespace Sys\Application\Exception\Input;
 
 use Sys\Infrastructure\Exception\Abstract\ApplicationException;
 
-final class InputStringValueException extends ApplicationException
+class InputStringValueException extends ApplicationException
 {
     public function __construct(
         string $message,

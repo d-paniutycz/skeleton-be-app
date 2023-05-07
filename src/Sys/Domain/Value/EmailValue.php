@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sys\Domain\Value;
 
-use Sys\Application\Exception\InputStringValueException;
+use Sys\Application\Exception\Input\InputStringValueException;
 use Sys\Domain\Value\Basic\StringValue;
 
 abstract class EmailValue extends StringValue

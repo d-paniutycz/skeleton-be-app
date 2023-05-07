@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Sys\Application\Exception\InputValidationFailedException;
+use Sys\Application\Exception\Input\InputValidationFailedException;
 use Sys\Infrastructure\Component\Denormalizer\Class\ClassDenormalizer;
 
 readonly class RequestResolver implements ValueResolverInterface

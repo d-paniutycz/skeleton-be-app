@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sys\Infrastructure\Port\Web\Resolver\Request\Strategy;
 
 use Symfony\Component\HttpFoundation\Request;
-use Sys\Application\Exception\InputPropertyTypeException;
+use Sys\Application\Exception\Input\InputPropertyTypeException;
 
 class JsonContentResolverStrategy implements RequestResolverStrategy
 {

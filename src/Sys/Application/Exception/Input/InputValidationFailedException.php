@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Application\Exception;
+namespace Sys\Application\Exception\Input;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Sys\Infrastructure\Exception\Abstract\ApplicationException;
