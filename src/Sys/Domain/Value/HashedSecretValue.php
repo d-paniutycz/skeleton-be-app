@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sys\Domain\Value;
 
+use Sys\Domain\Value\Basic\StringValue;
+
 abstract class HashedSecretValue extends StringValue
 {
     final public function __construct(string $value)

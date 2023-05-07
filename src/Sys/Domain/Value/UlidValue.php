@@ -6,6 +6,7 @@ namespace Sys\Domain\Value;
 
 use Symfony\Component\Uid\Ulid;
 use Sys\Application\Exception\InputStringValueException;
+use Sys\Domain\Value\Basic\StringValue;
 
 abstract class UlidValue extends StringValue
 {

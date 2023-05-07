@@ -2,20 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Sys\Domain\Value;
+namespace Sys\Domain\Value\Basic;
 
 use Stringable;
 
-abstract class StringValue implements Valuable, Stringable
+abstract class IntegerValue implements Valuable, Stringable
 {
-    protected string $value;
-
-    public function __construct(string $value)
-    {
-        $this->value = $value;
+    public function __construct(
+        protected readonly int $value
+    ) {
     }
 
-    public function getValue(): string
+    public function getValue(): int
     {
         return $this->value;
     }
@@ -25,13 +23,13 @@ abstract class StringValue implements Valuable, Stringable
         return $this->value === $value->getValue();
     }
 
-    public function jsonSerialize(): string
+    public function jsonSerialize(): int
     {
         return $this->value;
     }
 
     public function __toString(): string
     {
-        return $this->value;
+        return (string) $this->value;
     }
 }
