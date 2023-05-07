@@ -14,8 +14,10 @@ class InputValidationFailedException extends ApplicationException
      */
     public readonly array $violations;
 
-    public function __construct(string $message, ConstraintViolationListInterface $violationList)
-    {
+    public function __construct(
+        string $message,
+        ConstraintViolationListInterface $violationList
+    ) {
         $this->violations = $this->getViolations($violationList);
 
         parent::__construct($message);

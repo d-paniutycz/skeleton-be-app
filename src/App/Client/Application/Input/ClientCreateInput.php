@@ -9,18 +9,15 @@ use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\JsonContentResolverStr
 use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\RequestResolverStrategy;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class ClientCreateInput implements ResolvableRequest
+readonly class ClientCreateInput implements ResolvableRequest
 {
-    #[Assert\Email]
-    public readonly string $email;
-
-    #[Assert\Range(min: 16, max: 32)]
-    public readonly int $age;
-
-    public function __construct(string $email, int $age)
-    {
-        $this->email = $email;
-        $this->age = $age;
+    public function __construct(
+        #[Assert\Type('alnum')]
+        #[Assert\Length(min: 8, max: 32)]
+        public string $username,
+        #[Assert\Length(min: 8, max: 32)]
+        public string $password,
+    ) {
     }
 
     public static function getRequestResolver(): RequestResolverStrategy

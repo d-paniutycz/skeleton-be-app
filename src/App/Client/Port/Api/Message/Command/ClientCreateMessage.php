@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Client\Port\Api\Message\Command;
 
-use App\Client\Domain\Value\ClientEmail;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
+use App\Client\Domain\Value\ClientUsername;
 use Sys\Application\Messenger\Message\CommandMessage;
 
-readonly class ClientCreateCommand implements CommandMessage
+readonly class ClientCreateMessage implements CommandMessage
 {
     public function __construct(
-        public ClientId $id,
-        public ClientEmail $email,
-        public ClientPassword $password,
+        public ClientId $clientId,
+        public ClientUsername $clientUsername,
+        public ClientPassword $clientPassword,
     ) {
     }
 }

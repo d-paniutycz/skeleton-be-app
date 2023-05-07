@@ -22,4 +22,14 @@ abstract class ApplicationException extends RuntimeException implements HttpExce
     {
         return [];
     }
+
+    /**
+     * @param class-string $type
+     */
+    protected function getTypeShortName(string $type): string
+    {
+        $parts = explode('\\', $type);
+
+        return end($parts);
+    }
 }

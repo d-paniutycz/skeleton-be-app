@@ -7,6 +7,7 @@ namespace Sys\Infrastructure\Exception;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Sys\Infrastructure\Exception\Problem\ApiProblemResponseBuilder;
 use Throwable;
 
@@ -24,6 +25,15 @@ class ExceptionEventListener
     public function __invoke(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
+        if ($exception instanceof HandlerFailedException) {
+            // @TODO: test a little how its behave in SAPI, if should be unpacked by bus
+            $exception = $exception->getPrevious();
+
+            if (is_null($exception)) {
+                return;
+            }
+        }
+
         if ($exception instanceof HttpExceptionInterface || $this->isOnWhiteList($exception)) {
             $event->setResponse(
                 $this->responseBuilder->buildFromException($exception)

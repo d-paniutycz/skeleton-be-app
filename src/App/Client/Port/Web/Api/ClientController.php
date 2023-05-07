@@ -6,22 +6,55 @@ namespace App\Client\Port\Web\Api;
 
 use App\Client\Application\Input\ClientCreateInput;
 use App\Client\Domain\Value\ClientId;
+use App\Client\Domain\Value\ClientPassword;
+use App\Client\Domain\Value\ClientUsername;
+use App\Client\Port\Api\Message\Command\ClientCreateMessage;
+use App\Client\Port\Api\Message\Query\ClientReadMessage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sys\Domain\Value\UlidValue;
 use Sys\Infrastructure\Port\Web\WebController;
 
-#[Route(path: '/api/v1/client')]
+#[Route(path: '/api/v1/client', requirements: ['clientId' => UlidValue::PATTERN])]
 final class ClientController extends WebController
 {
     #[Route(path: null, methods: Request::METHOD_POST)]
     public function create(ClientCreateInput $createInput): JsonResponse
     {
-        return new JsonResponse($createInput);
+        $this->commandBus->dispatch(
+            new ClientCreateMessage(
+                $clientId = ClientId::generate(),
+                new ClientUsername($createInput->username),
+                new ClientPassword($createInput->password),
+            )
+        );
+
+        return new JsonResponse(
+            $this->queryBus->dispatch(
+                new ClientReadMessage($clientId)
+            )
+        );
     }
 
     #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
-    public function get(ClientId $clientId): JsonResponse
+    public function read(ClientId $clientId): JsonResponse
+    {
+        return new JsonResponse(
+            $this->queryBus->dispatch(
+                new ClientReadMessage($clientId)
+            )
+        );
+    }
+
+    #[Route(path: '/{clientId}', methods: Request::METHOD_PATCH)]
+    public function update(ClientId $clientId): JsonResponse
+    {
+        return new JsonResponse($clientId);
+    }
+
+    #[Route(path: '/{clientId}', methods: Request::METHOD_DELETE)]
+    public function delete(ClientId $clientId): JsonResponse
     {
         return new JsonResponse($clientId);
     }

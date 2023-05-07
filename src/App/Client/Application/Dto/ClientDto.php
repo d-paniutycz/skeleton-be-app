@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Client\Application\Dto;
 
-use App\Client\Domain\Value\ClientEmail;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
+use App\Client\Domain\Value\ClientUsername;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
-class ClientDto implements UserInterface
+readonly class ClientDto implements UserInterface
 {
     public function __construct(
-        public readonly ClientId $id,
-        public readonly ClientEmail $email,
-        #[Ignore] public ?ClientPassword $password,
+        public ClientId $id,
+        public ClientUsername $username,
+        #[Ignore]
+        public ClientPassword $password,
     ) {
     }
 
@@ -26,7 +27,7 @@ class ClientDto implements UserInterface
 
     public function eraseCredentials(): void
     {
-        $this->password = null;
+        unset($this->password);
     }
 
     public function getUserIdentifier(): string
