@@ -15,13 +15,16 @@ readonly class ClientCreateHandler implements CommandHandler
 {
     public function __construct(
         private ClientWriteRepository $clientWriteRepository,
-        private ClientReadRepository $clientReadRepository,
     ) {
     }
 
     public function __invoke(ClientCreateMessage $message): void
     {
-        if ($this->clientReadRepository->findByUsername($message->clientUsername)) {
+        $criteria = [
+            'username.value' => $message->clientUsername,
+        ];
+
+        if ($this->clientWriteRepository->findBy($criteria)) {
             throw new EntityExistsException(Client::class, $message->clientUsername, 'username');
         }
 

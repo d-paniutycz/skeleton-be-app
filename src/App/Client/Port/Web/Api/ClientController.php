@@ -9,6 +9,7 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
 use App\Client\Port\Api\Message\Command\ClientCreateMessage;
+use App\Client\Port\Api\Message\Command\ClientDeleteMessage;
 use App\Client\Port\Api\Message\Query\ClientReadMessage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +41,7 @@ final class ClientController extends WebController
     #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
     public function read(ClientId $clientId): JsonResponse
     {
+        // @TODO: use symfony serializer instead of json serializer
         return new JsonResponse(
             $this->queryBus->dispatch(
                 new ClientReadMessage($clientId)
@@ -47,15 +49,13 @@ final class ClientController extends WebController
         );
     }
 
-    #[Route(path: '/{clientId}', methods: Request::METHOD_PATCH)]
-    public function update(ClientId $clientId): JsonResponse
-    {
-        return new JsonResponse($clientId);
-    }
-
     #[Route(path: '/{clientId}', methods: Request::METHOD_DELETE)]
     public function delete(ClientId $clientId): JsonResponse
     {
-        return new JsonResponse($clientId);
+        $this->commandBus->dispatch(
+            new ClientDeleteMessage($clientId)
+        );
+
+        return new JsonResponse();
     }
 }

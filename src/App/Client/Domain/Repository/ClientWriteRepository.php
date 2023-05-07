@@ -11,5 +11,12 @@ interface ClientWriteRepository
 {
     public function persist(Client $client): void;
 
+    public function remove(Client $client): void;
+
     public function find(ClientId $clientId): ?Client;
+
+    /**
+     * @param array<string, mixed> $criteria
+     */
+    public function findBy(array $criteria): ?Client;
 }

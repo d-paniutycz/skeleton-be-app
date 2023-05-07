@@ -12,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class Client
 {
+    // @TODO: override Embedded in compose
     public function __construct(
-        #[ORM\Id]
-        #[ORM\Column(type: 'string')]
+        #[ORM\Embedded(columnPrefix: false)]
         private readonly ClientId $id,
-        #[ORM\Column(type: 'string', unique: true)]
+        #[ORM\Embedded(columnPrefix: false)]
         private readonly ClientUsername $username,
-        #[ORM\Column(type: 'string')]
+        #[ORM\Embedded(columnPrefix: false)]
         private ClientPassword $password,
     ) {
     }

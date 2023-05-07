@@ -9,7 +9,7 @@ use Stringable;
 abstract class StringValue implements Valuable, Stringable
 {
     public function __construct(
-        protected readonly string $value
+        protected string $value
     ) {
     }
 

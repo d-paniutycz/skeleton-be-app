@@ -11,7 +11,16 @@
     <projectFiles>
         <directory name="./src"/>
         <ignoreFiles>
-            <directory name="./vendor" />
+            <directory name="./vendor"/>
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <!-- not detecting constructors from parent classes -->
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="./src"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
 </psalm>

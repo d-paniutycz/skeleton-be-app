@@ -17,10 +17,22 @@ class ClientOrmRepository extends OrmRepository implements ClientWriteRepository
         $this->manager->persist($client);
     }
 
+    public function remove(Client $client): void
+    {
+        $this->manager->remove($client);
+    }
+
     public function find(ClientId $clientId): ?Client
     {
         return $this->manager
             ->getRepository(Client::class)
             ->find($clientId, LockMode::PESSIMISTIC_READ);
+    }
+
+    public function findBy(array $criteria): ?Client
+    {
+        return $this->manager
+            ->getRepository(Client::class)
+            ->findOneBy($criteria);
     }
 }
