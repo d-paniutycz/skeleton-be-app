@@ -7,7 +7,7 @@ namespace Sys\Domain\Value\Basic;
 abstract class BooleanValue implements Valuable
 {
     public function __construct(
-        protected bool $value
+        protected readonly bool $value
     ) {
     }
 

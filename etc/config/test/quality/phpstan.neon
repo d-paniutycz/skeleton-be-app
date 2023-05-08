@@ -3,3 +3,7 @@ parameters:
 	checkGenericClassInNonGenericObjectType: false
 	paths:
 		- %currentWorkingDirectory%/src
+
+	ignoreErrors:
+#       aggregate root does not always have to share its data
+		- '#Property .*\\Domain\\[^\\]+::\$[^\\]+ is never read, only written.#'

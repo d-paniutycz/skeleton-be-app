@@ -16,7 +16,7 @@
     </projectFiles>
 
     <issueHandlers>
-        <!-- not detecting constructors from parent classes -->
+        <!-- not detecting setter calls from constructor and constructors from parent/abstract classes -->
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <directory name="./src"/>

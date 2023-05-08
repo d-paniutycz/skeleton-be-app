@@ -8,38 +8,47 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
 use Doctrine\ORM\Mapping as ORM;
+use Sys\Infrastructure\Doctrine\Lifecycle\Timestamp\EntityCreatedAtTrait;
+use Sys\Infrastructure\Doctrine\Lifecycle\Timestamp\EntityUpdatedAtTrait;
 
-#[ORM\Entity]
+#[ORM\Entity, ORM\HasLifecycleCallbacks]
 class Client
 {
-    // @TODO: override Embedded in compose
+    use EntityCreatedAtTrait;
+    use EntityUpdatedAtTrait;
+
+    #[ORM\Column, ORM\Id]
+    private readonly string $id;
+
+    #[ORM\Column(unique: true)]
+    private string $username;
+
+    #[ORM\Column]
+    private string $password;
+
     public function __construct(
-        #[ORM\Embedded(columnPrefix: false)]
-        private readonly ClientId $id,
-        #[ORM\Embedded(columnPrefix: false)]
-        private readonly ClientUsername $username,
-        #[ORM\Embedded(columnPrefix: false)]
-        private ClientPassword $password,
+        ClientId $id,
+        ClientUsername $username,
+        ClientPassword $password,
     ) {
+        $this->id = $id->getValue();
+
+        $this->setUsername($username);
+        $this->setPassword($password);
     }
 
     public function getId(): ClientId
     {
-        return $this->id;
+        return new ClientId($this->id);
     }
 
-    public function getUsername(): ClientUsername
+    public function setUsername(ClientUsername $username): void
     {
-        return $this->username;
-    }
-
-    public function getPassword(): ClientPassword
-    {
-        return $this->password;
+        $this->username = $username->getValue();
     }
 
     public function setPassword(ClientPassword $password): void
     {
-        $this->password = $password;
+        $this->password = $password->getValue();
     }
 }

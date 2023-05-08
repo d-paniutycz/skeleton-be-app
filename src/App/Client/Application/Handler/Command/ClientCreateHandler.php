@@ -21,7 +21,7 @@ readonly class ClientCreateHandler implements CommandHandler
     public function __invoke(ClientCreateMessage $message): void
     {
         $criteria = [
-            'username.value' => $message->clientUsername,
+            'username' => $message->clientUsername,
         ];
 
         if ($this->clientWriteRepository->findBy($criteria)) {
