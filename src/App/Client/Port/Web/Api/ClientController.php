@@ -26,7 +26,8 @@ final class ClientController extends WebController
         $this->commandBus->dispatch(
             new ClientCreateMessage(
                 $clientId = ClientId::generate(),
-                new ClientUsername($createInput->username),
+                //new ClientUsername($createInput->username),
+                new ClientUsername($clientId->getValue()),
                 new ClientPassword($createInput->password),
             )
         );

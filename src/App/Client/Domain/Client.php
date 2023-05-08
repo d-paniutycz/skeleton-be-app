@@ -8,15 +8,11 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
 use Doctrine\ORM\Mapping as ORM;
-use Sys\Infrastructure\Doctrine\Lifecycle\Timestamp\EntityCreatedAtTrait;
-use Sys\Infrastructure\Doctrine\Lifecycle\Timestamp\EntityUpdatedAtTrait;
+use Sys\Domain\AggregateRoot;
 
 #[ORM\Entity, ORM\HasLifecycleCallbacks]
-class Client
+class Client extends AggregateRoot
 {
-    use EntityCreatedAtTrait;
-    use EntityUpdatedAtTrait;
-
     #[ORM\Column, ORM\Id]
     private readonly string $id;
 

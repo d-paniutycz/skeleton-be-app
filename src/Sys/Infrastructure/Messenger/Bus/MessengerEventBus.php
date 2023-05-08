@@ -7,16 +7,20 @@ namespace Sys\Infrastructure\Messenger\Bus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Sys\Application\Messenger\Bus\EventBus;
 use Sys\Application\Messenger\Message\EventMessage;
+use Sys\Infrastructure\Messenger\MessengerPackingService;
 
 readonly class MessengerEventBus implements EventBus
 {
     public function __construct(
-        private MessageBusInterface $event,
+        private MessageBusInterface $eventBus,
+        private MessengerPackingService $packingService,
     ) {
     }
 
     public function dispatch(EventMessage $message): void
     {
-        $this->event->dispatch($message);
+        $this->eventBus->dispatch(
+            $this->packingService->pack($message)
+        );
     }
 }

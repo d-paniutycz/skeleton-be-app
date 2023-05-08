@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sys\Application\Messenger\Message;
 
-interface QueryMessage
+use Sys\Infrastructure\Messenger\Message\MessengerMessage;
+
+interface QueryMessage extends MessengerMessage
 {
 }

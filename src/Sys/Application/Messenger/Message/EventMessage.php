@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sys\Application\Messenger\Message;
 
-interface EventMessage
+use Sys\Infrastructure\Messenger\Message\MessengerMessage;
+
+interface EventMessage extends MessengerMessage
 {
 }

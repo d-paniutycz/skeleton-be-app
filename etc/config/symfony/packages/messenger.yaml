@@ -1,22 +1,25 @@
 framework:
     messenger:
-        default_bus: command
+        default_bus: command.bus
         buses:
-            command:
+            command.bus:
                 middleware:
                     - doctrine_transaction
-            query: ~
-            event: ~
+            query.bus: ~
+            event.bus: ~
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            async: 'sync://'
 
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
+
+            # interface routing
+            Sys\Application\Messenger\Message\Flag\AsyncTransportMessage: async
 
 # when@test:
 #    framework:

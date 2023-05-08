@@ -1,6 +1,6 @@
 <?php
 
-namespace Sys\Infrastructure\Doctrine\Lifecycle\Timestamp;
+namespace Sys\Domain\Entity\Trait\Timestamp;
 
 use DateTime;
 use DateTimeImmutable;

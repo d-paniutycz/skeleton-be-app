@@ -24,11 +24,11 @@ services:
     _instanceof:
         # Messenger handlers
         Sys\Application\Messenger\Handler\CommandHandler:
-            tags: [ { name: messenger.message_handler, bus: command } ]
+            tags: [ { name: messenger.message_handler, bus: command.bus } ]
         Sys\Application\Messenger\Handler\QueryHandler:
-            tags: [ { name: messenger.message_handler, bus: query } ]
+            tags: [ { name: messenger.message_handler, bus: query.bus } ]
         Sys\Application\Messenger\Handler\EventHandler:
-            tags: [ { name: messenger.message_handler, bus: event } ]
+            tags: [ { name: messenger.message_handler, bus: event.bus } ]
         # Controllers
         Sys\Infrastructure\Port\Web\WebController:
             tags: [ { name: controller.service_arguments } ]
