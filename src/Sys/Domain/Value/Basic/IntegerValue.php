@@ -6,7 +6,7 @@ namespace Sys\Domain\Value\Basic;
 
 use Stringable;
 
-abstract class IntegerValue implements Valuable, Stringable
+abstract class IntegerValue implements Valuable
 {
     public function __construct(
         protected readonly int $value
@@ -26,10 +26,5 @@ abstract class IntegerValue implements Valuable, Stringable
     public function jsonSerialize(): int
     {
         return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return (string) $this->value;
     }
 }

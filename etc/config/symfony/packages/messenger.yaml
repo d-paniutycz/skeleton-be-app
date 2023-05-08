@@ -6,13 +6,18 @@ framework:
                 middleware:
                     - doctrine_transaction
             query.bus: ~
-            event.bus: ~
+            event.bus:
+                default_middleware:
+                    allow_no_handlers: true
+                middleware:
+                    - doctrine_transaction
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
             async: 'sync://'
+            sync: 'sync://'
 
         routing:
             # Route your messages to the transports
