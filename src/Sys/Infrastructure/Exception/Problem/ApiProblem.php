@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Exception\Problem;
 
-final class ApiProblem
+final class ApiProblem implements \JsonSerializable
 {
     public static function tokenizeType(string $value): string
     {
@@ -54,5 +54,10 @@ final class ApiProblem
     public function addAdditional(string $key, mixed $value): void
     {
         $this->additional[$key] = $value;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
     }
 }

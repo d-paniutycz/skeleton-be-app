@@ -5,7 +5,9 @@ framework:
             command.bus:
                 middleware:
                     - doctrine_transaction
+
             query.bus: ~
+
             event.bus:
                 default_middleware:
                     allow_no_handlers: true
@@ -24,7 +26,7 @@ framework:
             # 'App\Message\YourMessage': async
 
             # interface routing
-            Sys\Application\Messenger\Message\Flag\AsyncTransportMessage: async
+            Sys\Application\Messenger\Message\Flag\AsyncMessage: async
 
 # when@test:
 #    framework:

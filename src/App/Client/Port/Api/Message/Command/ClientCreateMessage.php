@@ -8,10 +8,9 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
 use Sys\Application\Messenger\Message\CommandMessage;
-use Sys\Application\Messenger\Message\Flag\AfterCurrentMessage;
-use Sys\Application\Messenger\Message\Flag\AsyncTransportMessage;
+use Sys\Application\Messenger\Message\Flag\AsyncMessage;
 
-readonly class ClientCreateMessage implements CommandMessage, AsyncTransportMessage, AfterCurrentMessage
+readonly class ClientCreateMessage implements CommandMessage, AsyncMessage
 {
     public function __construct(
         public ClientId $clientId,

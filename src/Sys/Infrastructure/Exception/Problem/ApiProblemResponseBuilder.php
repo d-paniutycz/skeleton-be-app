@@ -7,13 +7,13 @@ namespace Sys\Infrastructure\Exception\Problem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\Serializer\SerializerInterface;
+use Sys\Infrastructure\Component\Serializer\PublicDataSerializer;
 use Throwable;
 
 readonly class ApiProblemResponseBuilder
 {
     public function __construct(
-        private SerializerInterface $serializer,
+        private PublicDataSerializer $serializer,
         private ApiProblemExceptionMapper $exceptionMapper,
     ) {
     }
@@ -23,7 +23,7 @@ readonly class ApiProblemResponseBuilder
      */
     public function build(ApiProblem $apiProblem, array $headers = []): Response
     {
-        $content = $this->serializer->serialize($apiProblem, 'json');
+        $content = $this->serializer->serialize($apiProblem);
 
         $headers = new ResponseHeaderBag($headers);
         $headers->set('Content-Type', 'application/problem+json');

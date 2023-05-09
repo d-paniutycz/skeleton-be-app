@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Client\Application\Handler\Command;
 
-use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Domain\Client;
 use App\Client\Domain\Repository\ClientWriteRepository;
-use App\Client\Port\Api\Message\Command\ClientCreateMessage;
 use App\Client\Port\Api\Message\Command\ClientDeleteMessage;
-use Sys\Application\Exception\Entity\EntityExistsException;
 use Sys\Application\Exception\Entity\EntityNotFoundException;
 use Sys\Application\Messenger\Handler\CommandHandler;
 

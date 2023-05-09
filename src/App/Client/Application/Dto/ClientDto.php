@@ -8,6 +8,7 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 readonly class ClientDto implements UserInterface

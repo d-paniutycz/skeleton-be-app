@@ -7,7 +7,7 @@ namespace Sys\Infrastructure\Messenger;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Sys\Application\Messenger\Message\Flag\AfterCurrentMessage;
+use Sys\Application\Messenger\Message\Flag\AsyncMessage;
 use Sys\Infrastructure\Messenger\Message\MessengerMessage;
 
 class MessengerPackingService
@@ -15,7 +15,7 @@ class MessengerPackingService
     public function pack(MessengerMessage $message): Envelope
     {
         $stamps = [];
-        if ($message instanceof AfterCurrentMessage) {
+        if ($message instanceof AsyncMessage) {
             $stamps[] = new DispatchAfterCurrentBusStamp();
         }
 

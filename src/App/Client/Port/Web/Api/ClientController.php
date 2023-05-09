@@ -13,6 +13,7 @@ use App\Client\Port\Api\Message\Command\ClientDeleteMessage;
 use App\Client\Port\Api\Message\Query\ClientReadMessage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sys\Domain\Value\UlidValue;
 use Sys\Infrastructure\Port\Web\WebController;
@@ -21,7 +22,7 @@ use Sys\Infrastructure\Port\Web\WebController;
 final class ClientController extends WebController
 {
     #[Route(path: null, methods: Request::METHOD_POST)]
-    public function create(ClientCreateInput $createInput): JsonResponse
+    public function create(ClientCreateInput $createInput): Response
     {
         $this->commandBus->dispatch(
             new ClientCreateMessage(
@@ -32,21 +33,16 @@ final class ClientController extends WebController
             )
         );
 
-        return new JsonResponse(
-            $this->queryBus->dispatch(
-                new ClientReadMessage($clientId)
-            )
+        return $this->responseFromQuery(
+            new ClientReadMessage($clientId)
         );
     }
 
     #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
-    public function read(ClientId $clientId): JsonResponse
+    public function read(ClientId $clientId): Response
     {
-        // @TODO: use symfony serializer instead of json serializer
-        return new JsonResponse(
-            $this->queryBus->dispatch(
-                new ClientReadMessage($clientId)
-            )
+        return $this->responseFromQuery(
+            new ClientReadMessage($clientId)
         );
     }
 
