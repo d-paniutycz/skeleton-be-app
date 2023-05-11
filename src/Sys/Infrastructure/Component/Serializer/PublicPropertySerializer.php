@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
-readonly class PublicDataSerializer
+readonly class PublicPropertySerializer
 {
     private Serializer $serializer;
 

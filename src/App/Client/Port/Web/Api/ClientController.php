@@ -29,7 +29,7 @@ final class ClientController extends WebController
                 $clientId = ClientId::generate(),
                 //new ClientUsername($createInput->username),
                 new ClientUsername($clientId->getValue()),
-                new ClientPassword($createInput->password),
+                ClientPassword::hash($createInput->password),
             )
         );
 

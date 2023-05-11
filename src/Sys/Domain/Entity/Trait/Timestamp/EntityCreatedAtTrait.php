@@ -16,9 +16,4 @@ trait EntityCreatedAtTrait
     {
         $this->createdAt = new DateTime();
     }
-
-    public function getCreatedAt(): ?DateTimeImmutable
-    {
-        return $this->createdAt ? DateTimeImmutable::createFromMutable($this->createdAt) : null;
-    }
 }

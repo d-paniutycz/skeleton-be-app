@@ -9,12 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Sys\Application\Messenger\Bus\CommandBus;
 use Sys\Application\Messenger\Bus\QueryBus;
 use Sys\Application\Messenger\Message\QueryMessage;
-use Sys\Infrastructure\Component\Serializer\PublicDataSerializer;
+use Sys\Infrastructure\Component\Serializer\PublicPropertySerializer;
 
 abstract class WebController
 {
     public function __construct(
-        protected readonly PublicDataSerializer $serializer,
+        protected readonly PublicPropertySerializer $serializer,
         protected readonly CommandBus $commandBus,
         protected readonly QueryBus $queryBus,
     ) {

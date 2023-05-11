@@ -7,13 +7,13 @@ namespace Sys\Infrastructure\Exception\Problem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Sys\Infrastructure\Component\Serializer\PublicDataSerializer;
+use Sys\Infrastructure\Component\Serializer\PublicPropertySerializer;
 use Throwable;
 
 readonly class ApiProblemResponseBuilder
 {
     public function __construct(
-        private PublicDataSerializer $serializer,
+        private PublicPropertySerializer $serializer,
         private ApiProblemExceptionMapper $exceptionMapper,
     ) {
     }

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Client\Application\Dto;
 
+use App\Client\Domain\Value\ClientCreatedAt;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
+use App\Client\Domain\Value\ClientUpdatedAt;
 use App\Client\Domain\Value\ClientUsername;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 readonly class ClientDto implements UserInterface
@@ -18,6 +19,8 @@ readonly class ClientDto implements UserInterface
         public ClientUsername $username,
         #[Ignore]
         public ClientPassword $password,
+        public ClientCreatedAt $createdAt,
+        public ClientUpdatedAt $updatedAt,
     ) {
     }
 

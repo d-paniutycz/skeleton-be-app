@@ -16,9 +16,4 @@ trait EntityUpdatedAtTrait
     {
         $this->updatedAt = new DateTime();
     }
-
-    public function getUpdatedAt(): ?DateTimeImmutable
-    {
-        return $this->updatedAt ? DateTimeImmutable::createFromMutable($this->updatedAt) : null;
-    }
 }
