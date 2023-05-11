@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sys\Domain;
 
 use Doctrine\ORM\Mapping as ORM;
+use Generator;
 use Sys\Application\Messenger\Message\EventMessage;
 use Sys\Domain\Entity\Trait\Timestamp\EntityCreatedAtTrait;
 use Sys\Domain\Entity\Trait\Timestamp\EntityUpdatedAtTrait;
@@ -26,10 +27,12 @@ abstract class AggregateRoot
     }
 
     /**
-     * @return iterable<?EventMessage>
+     * @return Generator<EventMessage>
      */
-    public function pullEvent(): iterable
+    public function pullEvents(): Generator
     {
-        yield array_shift($this->events);
+        while (!empty($this->events)) {
+            yield array_shift($this->events);
+        }
     }
 }

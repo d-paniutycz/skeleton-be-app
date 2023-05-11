@@ -26,7 +26,7 @@ class ExceptionEventListener
     {
         $exception = $event->getThrowable();
         if ($exception instanceof HandlerFailedException) {
-            // @TODO: test a little how its behave in SAPI, if should be unpacked by bus
+            // @TODO: nested exceptions not only previous
             $exception = $exception->getPrevious();
 
             if (is_null($exception)) {
