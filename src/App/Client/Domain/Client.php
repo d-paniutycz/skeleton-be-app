@@ -7,6 +7,7 @@ namespace App\Client\Domain;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
+use App\Client\Port\Api\Message\Event\ClientCreatedMessage;
 use Doctrine\ORM\Mapping as ORM;
 use Sys\Domain\AggregateRoot;
 
@@ -31,6 +32,10 @@ class Client extends AggregateRoot
 
         $this->setUsername($username);
         $this->setPassword($password);
+
+        $this->pushEvent(
+            new ClientCreatedMessage($id)
+        );
     }
 
     public function getId(): ClientId
