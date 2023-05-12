@@ -4,13 +4,7 @@
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Sys\Infrastructure\Kernel;
 
-# @TODO: move to config dir after reworking loader in kernel class, would be good to check quality
-
-$_ENV['APP_RUNTIME_OPTIONS'] = [
-    'dotenv_path' => 'etc/config/dotenv/.env.' . $_ENV['APP_ENV'],
-    'prod_envs' => ['prd'],
-    'test_envs' => ['tst'],
-];
+$_ENV['APP_RUNTIME_OPTIONS'] = require dirname(__DIR__, 1) . '/config/symfony/runtime.php';
 
 require_once dirname(__DIR__, 2).'/vendor/autoload_runtime.php';
 
