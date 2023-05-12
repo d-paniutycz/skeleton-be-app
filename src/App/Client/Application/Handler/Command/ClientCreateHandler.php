@@ -33,6 +33,6 @@ readonly class ClientCreateHandler implements CommandHandler
             $message->clientPassword,
         );
 
-        $this->clientWriteRepository->persist($client);
+        $this->clientWriteRepository->save($client);
     }
 }

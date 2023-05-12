@@ -7,8 +7,9 @@ namespace App\Client\Application\Repository;
 use App\Client\Application\Dto\ClientDto;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientUsername;
+use Sys\Infrastructure\Doctrine\Repository\ReadRepository;
 
-interface ClientReadRepository
+interface ClientReadRepository extends ReadRepository
 {
     public function find(ClientId $clientId): ?ClientDto;
 

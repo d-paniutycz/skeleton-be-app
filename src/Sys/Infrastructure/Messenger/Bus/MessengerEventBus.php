@@ -7,6 +7,7 @@ namespace Sys\Infrastructure\Messenger\Bus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Sys\Application\Messenger\Bus\EventBus;
 use Sys\Application\Messenger\Message\EventMessage;
+use Sys\Domain\AggregateRoot;
 use Sys\Infrastructure\Messenger\MessengerPackingService;
 
 readonly class MessengerEventBus implements EventBus
@@ -22,5 +23,12 @@ readonly class MessengerEventBus implements EventBus
         $this->eventBus->dispatch(
             $this->packingService->pack($message)
         );
+    }
+
+    public function dispatchFromRoot(AggregateRoot $root): void
+    {
+        foreach ($root->pullEvents() as $event) {
+            $this->eventBus->dispatch($event);
+        }
     }
 }

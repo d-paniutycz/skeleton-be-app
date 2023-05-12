@@ -8,20 +8,10 @@ use App\Client\Domain\Client;
 use App\Client\Domain\Repository\ClientWriteRepository;
 use App\Client\Domain\Value\ClientId;
 use Doctrine\DBAL\LockMode;
-use Sys\Infrastructure\Doctrine\Repository\OrmRepository;
+use Sys\Infrastructure\Doctrine\Repository\AbstractWriteRepository;
 
-class ClientOrmRepository extends OrmRepository implements ClientWriteRepository
+class DoctrineClientWriteRepository extends AbstractWriteRepository implements ClientWriteRepository
 {
-    public function persist(Client $client): void
-    {
-        $this->manager->persist($client);
-    }
-
-    public function remove(Client $client): void
-    {
-        $this->manager->remove($client);
-    }
-
     public function find(ClientId $clientId): ?Client
     {
         return $this->manager

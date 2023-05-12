@@ -9,9 +9,9 @@ use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientUsername;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Sys\Infrastructure\Doctrine\Repository\DbalRepository;
+use Sys\Infrastructure\Doctrine\Repository\AbstractReadRepository;
 
-class ClientDbalRepository extends DbalRepository implements ClientReadRepository
+class DoctrineClientReadRepository extends AbstractReadRepository implements ClientReadRepository
 {
     private function fetchRecreatedClient(QueryBuilder $builder): ?ClientDto
     {
@@ -28,7 +28,7 @@ class ClientDbalRepository extends DbalRepository implements ClientReadRepositor
 
     private function getClientBuilder(): QueryBuilder
     {
-        return $this->connection->createQueryBuilder()
+        return $this->manager->getConnection()->createQueryBuilder()
             ->select('c.*')
             ->from('client', 'c');
     }

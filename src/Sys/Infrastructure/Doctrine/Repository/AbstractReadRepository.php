@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Doctrine\Repository;
 
-use Doctrine\DBAL\Connection;
 use Sys\Infrastructure\Component\Serializer\ValuablePropertySerializer;
+use Sys\Infrastructure\Doctrine\DoctrineConnectionManager;
 
-abstract class DbalRepository
+abstract class AbstractReadRepository
 {
     public function __construct(
-        protected readonly Connection $connection,
+        protected readonly DoctrineConnectionManager $manager,
         protected readonly ValuablePropertySerializer $serializer,
     ) {
     }
