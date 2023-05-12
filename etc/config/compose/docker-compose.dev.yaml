@@ -28,7 +28,7 @@ services:
       mode: replicated
       replicas: 1
 
-  # local mock
+  # local mock (dms)
   pg1:
     restart: 'no'
     deploy:

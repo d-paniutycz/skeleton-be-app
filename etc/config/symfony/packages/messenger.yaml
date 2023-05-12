@@ -19,6 +19,7 @@ framework:
                 dsn: 'doctrine://pg1_pri'
                 options:
                     table_name: '_sys_messenger_async'
+
             sync: 'sync://'
 
         routing:

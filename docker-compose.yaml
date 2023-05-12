@@ -44,7 +44,7 @@ services:
       php-ini:
         condition: service_completed_successfully
 
-  # local mock
+  # local mock (dms)
   pg1:
     profiles: ['dev', 'tst']
     image: bitnami/postgresql:15.2.0-debian-11-r26
