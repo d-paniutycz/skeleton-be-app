@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Sys\Infrastructure\Exception\Problem\ApiProblemResponseBuilder;
+use Sys\Infrastructure\Messenger\MessengerPackingService;
 use Throwable;
 
 #[AsEventListener]
@@ -19,6 +20,7 @@ class ExceptionEventListener
 
     public function __construct(
         private readonly ApiProblemResponseBuilder $responseBuilder,
+        private readonly MessengerPackingService $packingService,
     ) {
     }
 
@@ -26,8 +28,7 @@ class ExceptionEventListener
     {
         $exception = $event->getThrowable();
         if ($exception instanceof HandlerFailedException) {
-            // @TODO: nested exceptions not only previous
-            $exception = $exception->getPrevious();
+            $exception = $this->packingService->unpackException($exception);
 
             if (is_null($exception)) {
                 return;
