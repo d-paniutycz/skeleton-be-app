@@ -7,7 +7,7 @@ framework:
         #auto_mapping:
         #    App\Entity\: []
 
-when@test:
+when@tst:
     framework:
         validation:
             not_compromised_password: false

@@ -7,13 +7,21 @@ parameters:
 services:
     _defaults:
         autowire: true
-        autoconfigure: true # @TODO: set to false after writing tests to prevent double configuration
+        autoconfigure: true
 
-    # @TODO: add some "exclude:" with "glob" after writing tests as it slows the dev env
     App\:
         resource: '%kernel.project_dir%/src/App'
+        exclude:
+            - '%kernel.project_dir%/src/App/**/Domain/Value'
+            - '%kernel.project_dir%/src/App/**/Application/{Dto,Input,Exception}'
+            - '%kernel.project_dir%/src/App/**/Port/Api/Message'
+
     Sys\:
         resource: '%kernel.project_dir%/src/Sys'
+        exclude:
+            - '%kernel.project_dir%/src/Sys/Domain'
+            - '%kernel.project_dir%/src/Sys/Application/{Dto,Input,Exception}'
+            - '%kernel.project_dir%/src/Sys/Port/Api/Message'
 
     # Resolvers
     Sys\Infrastructure\Port\Web\Resolver\Value\UlidValueResolver:
