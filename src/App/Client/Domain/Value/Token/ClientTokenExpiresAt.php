@@ -6,6 +6,6 @@ namespace App\Client\Domain\Value\Token;
 
 use Sys\Domain\Value\Basic\DateTimeValue;
 
-class ClientTokenCreatedAt extends DateTimeValue
+class ClientTokenExpiresAt extends DateTimeValue
 {
 }

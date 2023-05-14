@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Client\Domain;
 
-use App\Client\Domain\Entity\ClientToken;
 use App\Client\Domain\Event\ClientCreatedMessage;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
+use App\Client\Domain\Value\Token\ClientTokenExpiresAt;
 use App\Client\Domain\Value\Token\ClientTokenValue;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -52,8 +52,10 @@ class Client extends AggregateRoot
 
     public function createToken(ClientTokenValue $tokenValue, bool $remember): void
     {
+        $expiresAt = $remember ? null : new ClientTokenExpiresAt('+1 day');
+
         $this->tokens->add(
-            new ClientToken($tokenValue, $this)
+            new ClientToken($tokenValue, $this, $expiresAt)
         );
     }
 }

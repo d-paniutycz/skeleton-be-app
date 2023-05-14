@@ -6,7 +6,7 @@ namespace App\Client\Application\Handler\Query;
 
 use App\Client\Application\Model\ClientTokenDto;
 use App\Client\Application\Repository\ClientTokenReadRepository;
-use App\Client\Domain\Entity\ClientToken;
+use App\Client\Domain\ClientToken;
 use App\Client\Port\Api\Message\Query\ClientTokenReadMessage;
 use Sys\Application\Exception\Entity\EntityNotFoundException;
 use Sys\Application\Messenger\Handler\QueryHandler;

@@ -12,7 +12,7 @@ services:
     App\:
         resource: '%kernel.project_dir%/src/App'
         exclude:
-            - '%kernel.project_dir%/src/App/**/Domain/{Value,Event,Entity}'
+            - '%kernel.project_dir%/src/App/**/Domain/{Value,Event}'
             - '%kernel.project_dir%/src/App/**/Application/{Model,Exception}'
             - '%kernel.project_dir%/src/App/**/Port/Api/Message'
 

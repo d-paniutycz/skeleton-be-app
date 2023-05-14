@@ -20,7 +20,7 @@ class EntityExistsException extends ApplicationException
      */
     public function __construct(
         string $type,
-        public readonly Stringable $value,
+        public readonly string|Stringable $value,
         string $property = 'id',
     ) {
         $this->type = $this->getTypeShortName($type);
