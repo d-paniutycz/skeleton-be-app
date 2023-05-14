@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Client\Port\Web\Api;
 
-use App\Client\Application\Input\ClientCreateInput;
+use App\Client\Application\Model\Input\ClientCreateInput;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
@@ -27,8 +27,7 @@ final class ClientController extends WebController
         $this->commandBus->dispatch(
             new ClientCreateMessage(
                 $clientId = ClientId::generate(),
-                //new ClientUsername($createInput->username),
-                new ClientUsername($clientId->getValue()),
+                new ClientUsername($createInput->username),
                 ClientPassword::hash($createInput->password),
             )
         );

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Client\Infrastructure\Security;
 
-use App\Client\Application\Dto\ClientDto;
+use App\Client\Application\Model\ClientDto;
 use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Domain\Value\ClientId;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -12,10 +12,10 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-readonly class ClientDtoProvider implements UserProviderInterface
+class ClientDtoProvider implements UserProviderInterface
 {
     public function __construct(
-        private ClientReadRepository $clientRepository,
+        private readonly ClientReadRepository $readRepository,
     ) {
     }
 
@@ -35,7 +35,7 @@ readonly class ClientDtoProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $clientDto = $this->clientRepository->find(
+        $clientDto = $this->readRepository->find(
             new ClientId($identifier)
         );
 

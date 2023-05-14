@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Client\Port\Api\Message\Event;
+namespace App\Client\Domain\Event;
 
 use App\Client\Domain\Value\ClientId;
 use Sys\Application\Messenger\Message\EventMessage;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Client\Infrastructure\Persistence\Doctrine;
 
-use App\Client\Application\Dto\ClientDto;
+use App\Client\Application\Model\ClientDto;
 use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientUsername;

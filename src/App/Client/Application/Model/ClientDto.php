@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Client\Application\Dto;
+namespace App\Client\Application\Model;
 
 use App\Client\Domain\Value\ClientCreatedAt;
 use App\Client\Domain\Value\ClientId;
@@ -31,7 +31,6 @@ readonly class ClientDto implements UserInterface
 
     public function eraseCredentials(): void
     {
-        unset($this->password);
     }
 
     public function getUserIdentifier(): string

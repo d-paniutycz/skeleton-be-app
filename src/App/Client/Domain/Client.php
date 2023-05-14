@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Client\Domain;
 
+use App\Client\Domain\Entity\ClientToken;
+use App\Client\Domain\Event\ClientCreatedMessage;
 use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
-use App\Client\Port\Api\Message\Event\ClientCreatedMessage;
+use App\Client\Domain\Value\Token\ClientTokenValue;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sys\Domain\AggregateRoot;
 
@@ -23,15 +27,18 @@ class Client extends AggregateRoot
     #[ORM\Column]
     private string $password;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: ClientToken::class, cascade: ['all'])]
+    private Collection $tokens;
+
     public function __construct(
         ClientId $id,
         ClientUsername $username,
         ClientPassword $password,
     ) {
         $this->id = $id->getValue();
-
-        $this->setUsername($username);
-        $this->setPassword($password);
+        $this->username = $username->getValue();
+        $this->password = $password->getValue();
+        $this->tokens = new ArrayCollection();
 
         $this->pushEvent(
             new ClientCreatedMessage($id)
@@ -43,13 +50,10 @@ class Client extends AggregateRoot
         return new ClientId($this->id);
     }
 
-    public function setUsername(ClientUsername $username): void
+    public function createToken(ClientTokenValue $tokenValue, bool $remember): void
     {
-        $this->username = $username->getValue();
-    }
-
-    public function setPassword(ClientPassword $password): void
-    {
-        $this->password = $password->getValue();
+        $this->tokens->add(
+            new ClientToken($tokenValue, $this)
+        );
     }
 }
