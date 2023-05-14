@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Port\Web;
 
+use App\Client\Port\Api\ClientSecurity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Sys\Application\Messenger\Bus\CommandBus;
 use Sys\Application\Messenger\Bus\QueryBus;
 use Sys\Application\Messenger\Message\QueryMessage;
-use Sys\Application\Security\SystemSecurity;
 use Sys\Infrastructure\Component\Serializer\PublicPropertySerializer;
 
 abstract class WebController
 {
     public function __construct(
         protected readonly PublicPropertySerializer $serializer,
-        protected readonly SystemSecurity $security,
+        protected readonly ClientSecurity $security,
         protected readonly CommandBus $commandBus,
         protected readonly QueryBus $queryBus,
     ) {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sys\Application\Security;
+namespace App\Client\Port\Api;
 
 use App\Client\Application\Model\ClientDto;
 use App\Client\Domain\Value\ClientId;
 
-interface SystemSecurity
+interface ClientSecurity
 {
     public function getClient(): ?ClientDto;
 

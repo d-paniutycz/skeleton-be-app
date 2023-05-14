@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sys\Domain\Value\UlidValue;
 use Sys\Infrastructure\Port\Web\WebController;
+use Sys\Infrastructure\Security\Guard\Guard;
+use Sys\Infrastructure\Security\Guard\GuardRole;
 
 #[Route(path: '/api/v1/client', requirements: ['clientId' => UlidValue::PATTERN])]
 final class ClientController extends WebController
@@ -42,6 +44,15 @@ final class ClientController extends WebController
     {
         return $this->responseFromQuery(
             new ClientReadMessage($clientId)
+        );
+    }
+
+    #[Guard(new GuardRole(['asd', 'asd']))]
+    #[Route(path: '/current', methods: Request::METHOD_GET)]
+    public function current(): Response
+    {
+        return $this->responseFromQuery(
+            new ClientReadMessage($this->security->getClientId())
         );
     }
 

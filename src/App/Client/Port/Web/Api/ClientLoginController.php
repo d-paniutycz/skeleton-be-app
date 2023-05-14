@@ -32,7 +32,7 @@ class ClientLoginController extends WebController
             new ClientTokenCreateMessage(
                 $tokenValue = ClientTokenValue::generate(),
                 $this->security->getClientId(),
-                $loginInput->remember
+                $loginInput->remember,
             )
         );
 
