@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Security;
 
+use RuntimeException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Sys\Application\Exception\NotAuthenticatedException;
 use Sys\Application\Security\SystemSecurity;
+use Sys\Domain\Value\Role;
 
 readonly class SecurityAdapter implements SystemSecurity
 {
@@ -27,9 +29,14 @@ readonly class SecurityAdapter implements SystemSecurity
         return $this->getUser()->getUserIdentifier();
     }
 
-    public function getUserRoles(): array
+    public function getUserRole(): Role
     {
-        return $this->getUser()->getRoles();
+        $roles = $this->getUser()->getRoles();
+        if (empty($roles)) {
+            throw new RuntimeException('User id: ' . $this->getUserId() . ' has no roles');
+        }
+
+        return Role::from($roles[0]);
     }
 
     public function login(UserInterface $user): void

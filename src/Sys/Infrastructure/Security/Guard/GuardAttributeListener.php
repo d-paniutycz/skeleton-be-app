@@ -36,7 +36,7 @@ readonly class GuardAttributeListener
     {
         if ($strategy instanceof GuardRoleStrategy) {
             $strategy->assert(
-                $this->security->getUserRoles()
+                $this->security->getUserRole()
             );
 
             return;

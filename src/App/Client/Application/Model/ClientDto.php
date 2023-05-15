@@ -26,7 +26,7 @@ readonly class ClientDto implements UserInterface
 
     public function getRoles(): array
     {
-        return [];
+        return ['ROLE_MASTER'];
     }
 
     public function eraseCredentials(): void

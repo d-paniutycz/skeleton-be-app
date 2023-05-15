@@ -9,7 +9,9 @@ use Sys\Domain\Value\Basic\Valuable;
 
 enum Role: string implements Valuable
 {
+    case BLOCKED = 'ROLE_BLOCKED';
     case REGULAR = 'ROLE_REGULAR';
+    case MODERATOR = 'ROLE_MODERATOR';
     case MASTER = 'ROLE_MASTER';
 
     public function getValue(): string

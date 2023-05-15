@@ -19,7 +19,8 @@ use Sys\Domain\Value\Role;
 use Sys\Domain\Value\UlidValue;
 use Sys\Infrastructure\Port\Web\WebController;
 use Sys\Infrastructure\Security\Guard\Guard;
-use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleAnyOf;
+use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleNot;
+use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleAny;
 
 #[Route(path: '/api/v1/client', requirements: ['clientId' => UlidValue::PATTERN])]
 final class ClientController extends WebController
@@ -48,7 +49,7 @@ final class ClientController extends WebController
         );
     }
 
-    #[Guard(new GuardRoleAnyOf(Role::REGULAR, Role::MASTER))]
+    #[Guard(new GuardRoleAny(Role::MASTER))]
     #[Route(path: '/current', methods: Request::METHOD_GET)]
     public function current(): Response
     {
