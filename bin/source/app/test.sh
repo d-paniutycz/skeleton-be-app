@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 declare BASE_DIR=$(dirname "$0")
+declare COVERAGE_FILE="var/coverage.txt"
 source "$BASE_DIR/../basic.sh"
 
 usage() {
@@ -66,6 +67,14 @@ setup() {
   fi
 }
 
+assert_script_is_executable() {
+  local script=$1
+
+  if ! [[ -x "$script" ]]; then
+    die "Script '$script' is missing or not executable"
+  fi
+}
+
 assert_binary_is_executable() {
   local binary=$1
 
@@ -76,6 +85,10 @@ assert_binary_is_executable() {
 
 exec_php() {
   php -d error_reporting=24575 "$@"
+}
+
+exec_php_coverage() {
+  php -d error_reporting=24575 -d xdebug.mode=coverage "$@"
 }
 
 run_phpmd() {
@@ -119,10 +132,31 @@ run_phpstan() {
 }
 
 run_phpunit() {
-  echo "(not implemented)"
+  local script="./vendor/bin/phpunit"
+  local config="$CONFIG_DIR/test/code/phpunit.xml"
+
+  assert_script_is_executable "$script"
+  assert_file_exists "$config"
+
+  exec_php_coverage $script -c "$config" --no-progress --coverage-text="$COVERAGE_FILE"
 }
+
 run_coverage() {
-  echo "(not implemented)"
+  local threshold=60
+
+  if [[ -f "$COVERAGE_FILE" ]]; then
+    cat "$COVERAGE_FILE"
+  else
+    die "Coverage '$COVERAGE_FILE' report not found, run phpunit first."
+  fi
+
+  lines=$(grep -oE 'Lines: +[0-9.]+' "$COVERAGE_FILE" | awk '{print $NF}')
+
+  rm "$COVERAGE_FILE"
+
+  if (( $(bc <<< "$lines < $threshold") )); then
+    die "Lines coverage threshold ($threshold%) is too low!"
+  fi
 }
 
 main() {
