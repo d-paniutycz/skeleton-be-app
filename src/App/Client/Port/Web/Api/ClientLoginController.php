@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Client\Port\Web\Api;
 
 use App\Client\Application\Model\Input\ClientLoginInput;
+use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientUsername;
 use App\Client\Domain\Value\Token\ClientTokenValue;
 use App\Client\Port\Api\Message\Command\ClientLoginMessage;
@@ -31,7 +32,9 @@ class ClientLoginController extends WebController
         $this->commandBus->dispatch(
             new ClientTokenCreateMessage(
                 $tokenValue = ClientTokenValue::generate(),
-                $this->security->getClientId(),
+                new ClientId(
+                    $this->security->getUserId()
+                ),
                 $loginInput->remember,
             )
         );

@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace Sys\Infrastructure\Security\Guard;
 
+use RuntimeException;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use Sys\Application\Security\SystemSecurity;
+use Sys\Infrastructure\Security\Guard\Strategy\GuardStrategy;
+use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleStrategy;
 
 #[AsEventListener]
-class GuardAttributeListener
+readonly class GuardAttributeListener
 {
+    public function __construct(
+        private SystemSecurity $security,
+    ) {
+    }
+
     public function __invoke(ControllerArgumentsEvent $event): void
     {
         /** @var ?Guard[] $guards */
@@ -19,12 +28,20 @@ class GuardAttributeListener
         }
 
         foreach ($guards as $guard) {
-            $this->process($guard->strategy);
+            $this->apply($guard->strategy);
         }
     }
 
-    private function process(GuardStrategy $strategy): void
+    private function apply(GuardStrategy $strategy): void
     {
-        $strategy->apply();
+        if ($strategy instanceof GuardRoleStrategy) {
+            $strategy->assert(
+                $this->security->getUserRoles()
+            );
+
+            return;
+        }
+
+        throw new RuntimeException('Guard has not applied any assertions.');
     }
 }

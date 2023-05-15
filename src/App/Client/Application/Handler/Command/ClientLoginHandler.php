@@ -7,14 +7,14 @@ namespace App\Client\Application\Handler\Command;
 use App\Client\Application\Exception\ClientBadCredentialsException;
 use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Port\Api\Message\Command\ClientLoginMessage;
-use App\Client\Port\Api\ClientSecurity;
 use Sys\Application\Messenger\Handler\CommandHandler;
+use Sys\Application\Security\SystemSecurity;
 
 readonly class ClientLoginHandler implements CommandHandler
 {
     public function __construct(
         private ClientReadRepository $clientReadRepository,
-        private ClientSecurity $security,
+        private SystemSecurity $security,
     ) {
     }
 
