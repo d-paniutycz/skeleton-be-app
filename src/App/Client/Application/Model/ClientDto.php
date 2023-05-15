@@ -11,6 +11,7 @@ use App\Client\Domain\Value\ClientUpdatedAt;
 use App\Client\Domain\Value\ClientUsername;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Sys\Domain\Value\Role;
 
 readonly class ClientDto implements UserInterface
 {
@@ -19,6 +20,7 @@ readonly class ClientDto implements UserInterface
         public ClientUsername $username,
         #[Ignore]
         public ClientPassword $password,
+        public Role $role,
         public ClientCreatedAt $createdAt,
         public ClientUpdatedAt $updatedAt,
     ) {
@@ -26,7 +28,7 @@ readonly class ClientDto implements UserInterface
 
     public function getRoles(): array
     {
-        return ['ROLE_MASTER'];
+        return [$this->role->getValue()];
     }
 
     public function eraseCredentials(): void

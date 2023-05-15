@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sys\Domain\AggregateRoot;
+use Sys\Domain\Value\Role;
 
 #[ORM\Entity, ORM\HasLifecycleCallbacks]
 class Client extends AggregateRoot
@@ -27,6 +28,9 @@ class Client extends AggregateRoot
     #[ORM\Column]
     private string $password;
 
+    #[ORM\Column]
+    private Role $role = Role::REGULAR;
+
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: ClientToken::class, cascade: ['all'])]
     private Collection $tokens;
 
@@ -38,6 +42,7 @@ class Client extends AggregateRoot
         $this->id = $id->getValue();
         $this->username = $username->getValue();
         $this->password = $password->getValue();
+
         $this->tokens = new ArrayCollection();
 
         $this->pushEvent(
@@ -57,5 +62,10 @@ class Client extends AggregateRoot
         $this->tokens->add(
             new ClientToken($tokenValue, $this, $expiresAt)
         );
+    }
+
+    public function setRole(Role $role): void
+    {
+        $this->role = $role;
     }
 }

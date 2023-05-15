@@ -19,7 +19,6 @@ use Sys\Domain\Value\Role;
 use Sys\Domain\Value\UlidValue;
 use Sys\Infrastructure\Port\Web\WebController;
 use Sys\Infrastructure\Security\Guard\Guard;
-use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleNot;
 use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleAny;
 
 #[Route(path: '/api/v1/client', requirements: ['clientId' => UlidValue::PATTERN])]
@@ -41,6 +40,7 @@ final class ClientController extends WebController
         );
     }
 
+    #[Guard(new GuardRoleAny(Role::MASTER))]
     #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
     public function read(ClientId $clientId): Response
     {
@@ -49,7 +49,7 @@ final class ClientController extends WebController
         );
     }
 
-    #[Guard(new GuardRoleAny(Role::MASTER))]
+    #[Guard]
     #[Route(path: '/current', methods: Request::METHOD_GET)]
     public function current(): Response
     {
@@ -62,6 +62,7 @@ final class ClientController extends WebController
         );
     }
 
+    #[Guard(new GuardRoleAny(Role::MASTER))]
     #[Route(path: '/{clientId}', methods: Request::METHOD_DELETE)]
     public function delete(ClientId $clientId): JsonResponse
     {

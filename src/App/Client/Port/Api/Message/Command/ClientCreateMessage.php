@@ -8,6 +8,7 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Domain\Value\ClientPassword;
 use App\Client\Domain\Value\ClientUsername;
 use Sys\Application\Messenger\Message\CommandMessage;
+use Sys\Domain\Value\Role;
 
 readonly class ClientCreateMessage implements CommandMessage
 {
@@ -15,6 +16,7 @@ readonly class ClientCreateMessage implements CommandMessage
         public ClientId $clientId,
         public ClientUsername $clientUsername,
         public ClientPassword $clientPassword,
+        public ?Role $role = null,
     ) {
     }
 }

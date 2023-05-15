@@ -19,7 +19,7 @@ class ClientToken
     private readonly string $value;
 
     #[ORM\ManyToOne(targetEntity: Client::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     private readonly Client $client;
 
     #[ORM\Column(nullable: true)]

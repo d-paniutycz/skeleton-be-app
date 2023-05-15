@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sys\Infrastructure\Component\Serializer;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Sys\Infrastructure\Component\Serializer\Normalizer\ValuableNormalizer;
@@ -23,6 +24,7 @@ class ValuablePropertySerializer
         return new Serializer(
             [
                 new ValuableNormalizer(),
+                new BackedEnumNormalizer(),
                 new PropertyNormalizer(
                     nameConverter: new CamelCaseToSnakeCaseNameConverter()
                 ),
