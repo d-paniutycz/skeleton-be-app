@@ -6,11 +6,13 @@ namespace App\Client\Infrastructure\Security;
 
 use App\Client\Application\Model\ClientDto;
 use App\Client\Application\Repository\ClientReadRepository;
+use App\Client\Domain\Client;
 use App\Client\Domain\Value\ClientId;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Sys\Application\Exception\Entity\EntityNotFoundException;
 
 class ClientDtoProvider implements UserProviderInterface
 {
@@ -35,10 +37,9 @@ class ClientDtoProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $clientDto = $this->readRepository->find(
-            new ClientId($identifier)
-        );
+        $clientId = new ClientId($identifier);
 
-        return $clientDto ?? throw new UserNotFoundException();
+        return $this->readRepository->find($clientId)
+            ?? throw new EntityNotFoundException(Client::class, $clientId);
     }
 }

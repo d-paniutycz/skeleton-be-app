@@ -9,9 +9,7 @@ use App\Client\Domain\Value\ClientId;
 
 interface ClientSecurity
 {
-    public function getClient(): ?ClientDto;
-
     public function getClientId(): ClientId;
 
-    public function loginClient(ClientDto $clientDto): void;
+    public function login(ClientDto $clientDto): void;
 }

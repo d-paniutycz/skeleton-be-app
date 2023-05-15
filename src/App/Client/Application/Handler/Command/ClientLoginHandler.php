@@ -6,8 +6,8 @@ namespace App\Client\Application\Handler\Command;
 
 use App\Client\Application\Exception\ClientBadCredentialsException;
 use App\Client\Application\Repository\ClientReadRepository;
-use App\Client\Port\Api\ClientSecurity;
 use App\Client\Port\Api\Message\Command\ClientLoginMessage;
+use App\Client\Port\Api\ClientSecurity;
 use Sys\Application\Messenger\Handler\CommandHandler;
 
 readonly class ClientLoginHandler implements CommandHandler
@@ -27,6 +27,6 @@ readonly class ClientLoginHandler implements CommandHandler
             throw new ClientBadCredentialsException();
         }
 
-        $this->security->loginClient($clientDto);
+        $this->security->login($clientDto);
     }
 }

@@ -10,14 +10,14 @@ use App\Client\Domain\Value\ClientId;
 use App\Client\Port\Api\ClientSecurity;
 use Symfony\Bundle\SecurityBundle\Security;
 
-readonly class SecurityAdapter implements ClientSecurity
+readonly class ClientSecurityAdapter implements ClientSecurity
 {
     public function __construct(
         private Security $security,
     ) {
     }
 
-    public function getClient(): ?ClientDto
+    private function getClient(): ?ClientDto
     {
         /** @var ?ClientDto $client */
         $client = $this->security->getUser();
@@ -35,7 +35,7 @@ readonly class SecurityAdapter implements ClientSecurity
         return $client->id;
     }
 
-    public function loginClient(ClientDto $clientDto): void
+    public function login(ClientDto $clientDto): void
     {
         $this->security->login($clientDto);
     }
