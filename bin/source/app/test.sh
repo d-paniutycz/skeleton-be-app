@@ -142,7 +142,7 @@ run_phpunit() {
 }
 
 run_coverage() {
-  local threshold=60
+  local threshold=80
 
   if [[ -f "$COVERAGE_FILE" ]]; then
     cat "$COVERAGE_FILE"
@@ -150,12 +150,12 @@ run_coverage() {
     die "Coverage '$COVERAGE_FILE' report not found, run phpunit first."
   fi
 
-  lines=$(grep -oE 'Lines: +[0-9.]+' "$COVERAGE_FILE" | awk '{print $NF}')
+  methods=$(grep -m 1 -oE 'Methods: +[0-9.]+' "$COVERAGE_FILE" | awk '{print $NF}')
 
   rm "$COVERAGE_FILE"
 
-  if (( $(bc <<< "$lines < $threshold") )); then
-    die "Lines coverage threshold ($threshold%) is too low!"
+  if (( $(bc <<< "$methods < $threshold") )); then
+    die "Method coverage is $methods%, required is at least $threshold%"
   fi
 }
 

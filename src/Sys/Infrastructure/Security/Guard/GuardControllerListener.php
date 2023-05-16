@@ -12,10 +12,10 @@ use Sys\Infrastructure\Security\Guard\Strategy\GuardStrategy;
 use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleStrategy;
 
 #[AsEventListener]
-readonly class GuardAttributeListener
+readonly class GuardControllerListener
 {
     public function __construct(
-        private SystemSecurity $security,
+        private GuardProcessor $guardProcessor,
     ) {
     }
 
@@ -28,20 +28,7 @@ readonly class GuardAttributeListener
         }
 
         foreach ($guards as $guard) {
-            $this->apply($guard->strategy);
+            $this->guardProcessor->process($guard);
         }
-    }
-
-    private function apply(GuardStrategy $strategy): void
-    {
-        if ($strategy instanceof GuardRoleStrategy) {
-            $strategy->assert(
-                $this->security->getUserRole()
-            );
-
-            return;
-        }
-
-        throw new RuntimeException('Guard has not applied any assertions.');
     }
 }

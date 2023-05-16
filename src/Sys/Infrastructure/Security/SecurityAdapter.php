@@ -18,6 +18,11 @@ readonly class SecurityAdapter implements SystemSecurity
     ) {
     }
 
+    public function isUserAuthenticated(): bool
+    {
+        return null !== $this->security->getUser();
+    }
+
     private function getUser(): UserInterface
     {
         return $this->security->getUser()

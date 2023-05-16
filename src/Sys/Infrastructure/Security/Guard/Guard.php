@@ -10,9 +10,9 @@ use Sys\Infrastructure\Security\Guard\Strategy\GuardStrategy;
 use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleNot;
 
 #[Attribute(Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
-class Guard
+final class Guard
 {
-    public readonly GuardStrategy $strategy;
+    private GuardStrategy $strategy;
 
     public function __construct(
         ?GuardStrategy $strategy = null,
@@ -20,5 +20,10 @@ class Guard
         $this->strategy = is_null($strategy)
             ? new GuardRoleNot(Role::BLOCKED)
             : $strategy;
+    }
+
+    public function getStrategy(): GuardStrategy
+    {
+        return $this->strategy;
     }
 }

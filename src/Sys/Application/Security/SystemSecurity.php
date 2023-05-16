@@ -9,6 +9,8 @@ use Sys\Domain\Value\Role;
 
 interface SystemSecurity
 {
+    public function isUserAuthenticated(): bool;
+
     public function getUserId(): string;
 
     public function getUserRole(): Role;

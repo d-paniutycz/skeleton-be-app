@@ -41,7 +41,7 @@ abstract class DateTimeValue implements Valuable, Stringable
         $value = $value->getValue();
 
         if ($value instanceof DateTimeInterface) {
-            return strval($this) === $value->format($this->getFormat());
+            return strval($this) === $value->format(self::DEFAULT_FORMAT);
         }
 
         if ($value instanceof Stringable) {
@@ -55,11 +55,6 @@ abstract class DateTimeValue implements Valuable, Stringable
         return false;
     }
 
-    public function getFormat(): string
-    {
-        return self::DEFAULT_FORMAT;
-    }
-
     public function jsonSerialize(): string
     {
         return strval($this);
@@ -67,8 +62,6 @@ abstract class DateTimeValue implements Valuable, Stringable
 
     public function __toString(): string
     {
-        return $this->value->format(
-            $this->getFormat()
-        );
+        return $this->value->format(self::DEFAULT_FORMAT);
     }
 }
