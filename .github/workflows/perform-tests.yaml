@@ -148,7 +148,7 @@ jobs:
         if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
         run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test phpunit
       -
-        name: Test quality (coverage)
+        name: Test code (coverage)
         if: (inputs.fail_fast == false || success()) && steps.app-set-up.outcome == 'success'
         run: docker exec ${{ env.TEST_RUNNER_ID }} bin/app test coverage
       -

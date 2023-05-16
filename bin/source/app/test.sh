@@ -155,7 +155,7 @@ run_coverage() {
   rm "$COVERAGE_FILE"
 
   if (( $(bc <<< "$methods < $threshold") )); then
-    die "Method coverage is $methods%, required is at least $threshold%"
+    die "Method coverage is $methods%, have to be at least $threshold%"
   fi
 }
 
