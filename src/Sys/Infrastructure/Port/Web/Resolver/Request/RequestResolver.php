@@ -27,7 +27,7 @@ readonly class RequestResolver implements ValueResolverInterface
     {
         $type = $argument->getType();
         if (is_null($type) || !is_subclass_of($type, ResolvableRequest::class)) {
-            return [];
+            return null;
         }
 
         $data = $type::getRequestResolver()->resolve($request);
@@ -35,6 +35,7 @@ readonly class RequestResolver implements ValueResolverInterface
         /** @var ResolvableRequest $input */
         $input = $this->denormalizer->denormalize($data, $type);
 
+        // @TODO: decouple, will allow to use validation groups in direct calls
         $violationList = $this->validator->validate($input);
         if ($violationList->count() > 0) {
             throw new InputValidationFailedException('Resolver data validation failed', $violationList);

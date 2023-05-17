@@ -26,3 +26,5 @@ services:
     restart: 'no'
     deploy:
       mode: global
+    ports:
+      - '5433:5432'

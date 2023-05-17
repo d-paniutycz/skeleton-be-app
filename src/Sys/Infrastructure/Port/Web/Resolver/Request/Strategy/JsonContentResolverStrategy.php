@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sys\Infrastructure\Port\Web\Resolver\Request\Strategy;
 
 use Symfony\Component\HttpFoundation\Request;
-use Sys\Application\Exception\Input\InputPropertyTypeException;
 
 class JsonContentResolverStrategy implements RequestResolverStrategy
 {
@@ -26,11 +25,7 @@ class JsonContentResolverStrategy implements RequestResolverStrategy
             /** @var mixed $data */
             $data = $data[$this->key];
 
-            if (is_array($data)) {
-                return $data;
-            }
-
-            throw new InputPropertyTypeException($this->key, 'array', gettype($data));
+            return is_array($data) ? $data : [];
         }
 
         return [];

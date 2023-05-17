@@ -58,8 +58,6 @@ services:
       timeout: 5s
     networks:
       - net-be-dms
-    ports:
-      - '5432:5432'
 
 networks:
   default:

@@ -19,7 +19,7 @@ class UlidValueResolver implements ValueResolverInterface
     {
         $class = $argument->getType();
         if (is_null($class) || !is_subclass_of($class, UlidValue::class)) {
-            return [];
+            return null;
         }
 
         /** @var ?string $value */

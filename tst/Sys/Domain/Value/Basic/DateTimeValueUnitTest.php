@@ -6,6 +6,7 @@ use DateTime;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Sys\Application\Exception\Input\InputStringValueException;
 use Sys\Domain\Value\Basic\DateTimeValue;
+use Sys\Domain\Value\Basic\IntegerValue;
 use Sys\Domain\Value\Basic\StringValue;
 use Sys\Domain\Value\Basic\Valuable;
 use Sys\Infrastructure\Test\UnitTest;
@@ -58,6 +59,7 @@ class DateTimeValueUnitTest extends UnitTest
             [new class('2023-05-16T15:02:00.000Z') extends StringValue {}, true],
             [new class(new DateTime()) extends DateTimeValue {}, false],
             [new class('2023-05-16 15:02') extends StringValue {}, false],
+            [new class(1684242120) extends IntegerValue {}, false],
         ];
     }
 }

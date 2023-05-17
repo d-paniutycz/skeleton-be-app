@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sys\Infrastructure\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineConnectionManager
 {
