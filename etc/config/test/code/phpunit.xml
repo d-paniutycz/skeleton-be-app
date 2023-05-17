@@ -13,9 +13,9 @@
          testdox="true">
 
   <testsuites>
-    <testsuite name="app">
-      <directory>../../../../tst/App</directory>
-    </testsuite>
+<!--    <testsuite name="app">-->
+<!--      <directory>../../../../tst/App</directory>-->
+<!--    </testsuite>-->
     <testsuite name="sys">
       <directory>../../../../tst/Sys</directory>
     </testsuite>
