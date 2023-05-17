@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\Uid\Ulid;
 use Sys\Domain\Value\UlidValue;
 use Sys\Infrastructure\Port\Web\Resolver\Value\UlidValueResolver;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class UlidValueResolverUnitTest extends UnitTest
 {

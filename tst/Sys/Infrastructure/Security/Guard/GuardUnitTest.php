@@ -6,7 +6,7 @@ use Sys\Application\Exception\InsufficientRoleException;
 use Sys\Domain\Value\Role;
 use Sys\Infrastructure\Security\Guard\Guard;
 use Sys\Infrastructure\Security\Guard\Strategy\GuardStrategy;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class GuardUnitTest extends UnitTest
 {

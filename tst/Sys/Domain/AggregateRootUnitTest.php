@@ -4,7 +4,7 @@ namespace Sys\Test\Domain;
 
 use Sys\Application\Messenger\Message\EventMessage;
 use Sys\Domain\AggregateRoot;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class AggregateRootUnitTest extends UnitTest
 {

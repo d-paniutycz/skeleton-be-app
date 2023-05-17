@@ -8,7 +8,7 @@ use IteratorAggregate;
 use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 use Sys\Infrastructure\Component\Denormalizer\Class\ScalarClassDenormalizer;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class ScalarClassDenormalizerUnitTest extends UnitTest
 {

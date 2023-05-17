@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Sys\Domain\Value\Basic\StringValue;
 use Sys\Domain\Value\Basic\Valuable;
 use Sys\Domain\Value\Role;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class RoleUnitTest extends UnitTest
 {

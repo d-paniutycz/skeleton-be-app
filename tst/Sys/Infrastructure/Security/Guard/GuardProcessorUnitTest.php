@@ -9,7 +9,7 @@ use Sys\Infrastructure\Security\Guard\Guard;
 use Sys\Infrastructure\Security\Guard\GuardProcessor;
 use Sys\Infrastructure\Security\Guard\Strategy\GuardStrategy;
 use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleStrategy;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class GuardProcessorUnitTest extends UnitTest
 {

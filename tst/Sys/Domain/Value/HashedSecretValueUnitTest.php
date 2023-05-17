@@ -4,7 +4,7 @@ namespace Sys\Test\Domain\Value;
 
 use Sys\Application\Exception\Input\InputStringValueException;
 use Sys\Domain\Value\HashedSecretValue;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class HashedSecretValueUnitTest extends UnitTest
 {

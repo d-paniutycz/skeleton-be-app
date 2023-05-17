@@ -8,7 +8,7 @@ use Sys\Application\Messenger\Message\Flag\AsyncMessage;
 use Sys\Application\Messenger\Message\QueryMessage;
 use Sys\Infrastructure\Messenger\Bus\MessengerQueryBus;
 use Sys\Infrastructure\Messenger\MessengerPackingService;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class MessengerQueryBusUnitTest extends UnitTest
 {

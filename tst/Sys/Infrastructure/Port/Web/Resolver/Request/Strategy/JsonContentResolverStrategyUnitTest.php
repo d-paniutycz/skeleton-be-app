@@ -4,7 +4,7 @@ namespace Sys\Test\Infrastructure\Port\Web\Resolver\Request\Strategy;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sys\Infrastructure\Port\Web\Resolver\Request\Strategy\JsonContentResolverStrategy;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class JsonContentResolverStrategyUnitTest extends UnitTest
 {

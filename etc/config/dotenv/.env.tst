@@ -4,7 +4,7 @@ COMPOSE_PROFILES=tst
 
 # Config: app
 APP_ENV=tst
-APP_DEBUG=true
+APP_DEBUG=false
 APP_SECRET=secret
 APP_RELEASE=tech
 

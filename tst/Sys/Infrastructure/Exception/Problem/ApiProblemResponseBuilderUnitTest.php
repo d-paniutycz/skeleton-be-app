@@ -2,13 +2,12 @@
 
 namespace Sys\Test\Infrastructure\Exception\Problem;
 
-use Symfony\Component\HttpFoundation\Response;
 use Sys\Infrastructure\Component\Serializer\PublicPropertySerializer;
 use Sys\Infrastructure\Exception\Abstract\ApplicationException;
 use Sys\Infrastructure\Exception\Problem\ApiProblem;
 use Sys\Infrastructure\Exception\Problem\ApiProblemExceptionMapper;
 use Sys\Infrastructure\Exception\Problem\ApiProblemResponseBuilder;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class ApiProblemResponseBuilderUnitTest extends UnitTest
 {

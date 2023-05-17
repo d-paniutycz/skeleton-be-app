@@ -9,7 +9,7 @@ use Sys\Application\Messenger\Message\EventMessage;
 use Sys\Domain\AggregateRoot;
 use Sys\Infrastructure\Messenger\Bus\MessengerEventBus;
 use Sys\Infrastructure\Messenger\MessengerPackingService;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class MessengerEventBusUnitTest extends UnitTest
 {

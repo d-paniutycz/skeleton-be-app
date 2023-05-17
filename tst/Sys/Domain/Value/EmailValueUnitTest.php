@@ -5,7 +5,7 @@ namespace Sys\Test\Domain\Value;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Sys\Application\Exception\Input\InputStringValueException;
 use Sys\Domain\Value\EmailValue;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class EmailValueUnitTest extends UnitTest
 {

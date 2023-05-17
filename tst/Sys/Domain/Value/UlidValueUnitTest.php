@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Uid\Ulid;
 use Sys\Application\Exception\Input\InputStringValueException;
 use Sys\Domain\Value\UlidValue;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class UlidValueUnitTest extends UnitTest
 {

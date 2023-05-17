@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Sys\Application\Exception\NotAuthenticatedException;
 use Sys\Domain\Value\Role;
 use Sys\Infrastructure\Security\SecurityAdapter;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class SecurityAdapterUnitTest extends UnitTest
 {

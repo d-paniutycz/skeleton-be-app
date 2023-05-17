@@ -9,7 +9,7 @@ use Sys\Domain\Value\Basic\DateTimeValue;
 use Sys\Domain\Value\Basic\IntegerValue;
 use Sys\Domain\Value\Basic\StringValue;
 use Sys\Domain\Value\Basic\Valuable;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class DateTimeValueUnitTest extends UnitTest
 {

@@ -4,7 +4,7 @@ namespace Sys\Test\Infrastructure\Exception\Problem;
 
 use Sys\Infrastructure\Exception\Abstract\ApplicationException;
 use Sys\Infrastructure\Exception\Problem\ApiProblemExceptionMapper;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class ApiProblemExceptionMapperUnitTest extends UnitTest
 {

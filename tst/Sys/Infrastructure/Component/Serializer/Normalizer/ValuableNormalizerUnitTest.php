@@ -7,7 +7,7 @@ use stdClass;
 use Sys\Domain\Value\Basic\StringValue;
 use Sys\Domain\Value\Basic\Valuable;
 use Sys\Infrastructure\Component\Serializer\Normalizer\ValuableNormalizer;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class ValuableNormalizerUnitTest extends UnitTest
 {

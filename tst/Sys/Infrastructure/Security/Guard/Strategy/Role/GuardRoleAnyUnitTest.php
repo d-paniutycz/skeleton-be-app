@@ -5,7 +5,7 @@ namespace Sys\Test\Infrastructure\Security\Guard\Strategy\Role;
 use Sys\Application\Exception\InsufficientRoleException;
 use Sys\Domain\Value\Role;
 use Sys\Infrastructure\Security\Guard\Strategy\Role\GuardRoleAny;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class GuardRoleAnyUnitTest extends UnitTest
 {

@@ -4,7 +4,7 @@ namespace Sys\Test\Infrastructure\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Sys\Infrastructure\Doctrine\DoctrineConnectionManager;
-use Sys\Infrastructure\Test\UnitTest;
+use Sys\Infrastructure\Test\Type\UnitTest;
 
 class DoctrineConnectionManagerUnitTest extends UnitTest
 {
