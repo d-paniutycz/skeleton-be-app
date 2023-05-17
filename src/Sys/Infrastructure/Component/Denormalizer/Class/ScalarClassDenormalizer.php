@@ -117,10 +117,6 @@ class ScalarClassDenormalizer implements ClassDenormalizer
             return true;
         }
 
-        if ($typeA === 'float' && $typeB === 'integer') {
-            return true;
-        }
-
         return false;
     }
 }

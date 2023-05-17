@@ -9,11 +9,15 @@
          failOnRisky="true"
          failOnWarning="true"
          cacheResult="false"
-         colors="true">
+         colors="true"
+         testdox="true">
 
   <testsuites>
-    <testsuite name="default">
-      <directory>../../../../tst</directory>
+    <testsuite name="app">
+      <directory>../../../../tst/App</directory>
+    </testsuite>
+    <testsuite name="sys">
+      <directory>../../../../tst/Sys</directory>
     </testsuite>
   </testsuites>
 
