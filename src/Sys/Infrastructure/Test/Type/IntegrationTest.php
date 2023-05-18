@@ -6,12 +6,13 @@ namespace Sys\Infrastructure\Test\Type;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Sys\Infrastructure\Kernel;
 use Sys\Infrastructure\Test\Helper\Trait\DoctrineTransactionHelperTrait;
+use Sys\Infrastructure\Test\Helper\Trait\KernelContainerHelperTrait;
 
 abstract class IntegrationTest extends KernelTestCase
 {
     use DoctrineTransactionHelperTrait;
+    use KernelContainerHelperTrait;
 
     protected EntityManagerInterface $entityManager;
 
@@ -19,37 +20,17 @@ abstract class IntegrationTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->setUpProperties();
-        $this->beginTransaction();
-    }
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = parent::getContainer()->get(EntityManagerInterface::class);
+        $this->entityManager = $entityManager;
 
-    /**
-     * @psalm-suppress MixedAssignment
-     */
-    private function setUpProperties(): void
-    {
-        $this->entityManager = $this->getService(EntityManagerInterface::class);
+        self::beginTransaction($this->entityManager);
     }
 
     protected function tearDown(): void
     {
-        $this->rollbackTransaction();
+        self::rollbackTransaction($this->entityManager);
 
-        parent::tearDown();
-    }
-
-    public function getService(string $id): object
-    {
-        return parent::getContainer()->get($id);
-    }
-
-    public function setService(string $id, object $service): void
-    {
-        parent::getContainer()->set($id, $service);
-    }
-
-    final protected static function getKernelClass(): string
-    {
-        return Kernel::class;
+        parent::ensureKernelShutdown();
     }
 }

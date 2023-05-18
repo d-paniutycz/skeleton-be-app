@@ -7,11 +7,9 @@ use RuntimeException;
 
 trait DoctrineTransactionHelperTrait
 {
-    protected EntityManagerInterface $entityManager;
-
-    private function beginTransaction(): void
+    private static function beginTransaction(EntityManagerInterface $manager): void
     {
-        $connection = $this->entityManager->getConnection();
+        $connection = $manager->getConnection();
         if ($connection->isTransactionActive()) {
             throw new RuntimeException('Transaction is active, but should be not.');
         }
@@ -19,9 +17,9 @@ trait DoctrineTransactionHelperTrait
         $connection->beginTransaction();
     }
 
-    private function rollbackTransaction(): void
+    private static function rollbackTransaction(EntityManagerInterface $manager): void
     {
-        $connection = $this->entityManager->getConnection();
+        $connection = $manager->getConnection();
         if ($connection->isTransactionActive()) {
             $connection->rollBack();
         }

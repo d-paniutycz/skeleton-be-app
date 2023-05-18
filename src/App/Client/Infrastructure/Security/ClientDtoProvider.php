@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Client\Infrastructure\Security;
 
+use App\Client\Application\Exception\ClientBlockedException;
 use App\Client\Application\Model\ClientDto;
 use App\Client\Application\Repository\ClientReadRepository;
 use App\Client\Domain\Client;
@@ -13,6 +14,7 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Sys\Application\Exception\Entity\EntityNotFoundException;
+use Sys\Domain\Value\Role;
 
 class ClientDtoProvider implements UserProviderInterface
 {
@@ -39,7 +41,13 @@ class ClientDtoProvider implements UserProviderInterface
     {
         $clientId = new ClientId($identifier);
 
-        return $this->readRepository->find($clientId)
+        $clientDto = $this->readRepository->find($clientId)
             ?? throw new EntityNotFoundException(Client::class, $clientId);
+
+        if ($clientDto->role->equals(Role::BLOCKED)) {
+            throw new ClientBlockedException($clientId);
+        }
+
+        return $clientDto;
     }
 }
