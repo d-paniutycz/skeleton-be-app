@@ -15,7 +15,8 @@ class BooleanValueUnitTest extends UnitTest
 
     protected function setUp(): void
     {
-        $this->subject = new class(true) extends BooleanValue {};
+        $this->subject = new class (true) extends BooleanValue {
+        };
     }
 
     #[DataProvider('valuableProvider')]
@@ -40,12 +41,36 @@ class BooleanValueUnitTest extends UnitTest
     public static function valuableProvider(): array
     {
         return [
-            [new class(true) extends BooleanValue {}, true],
-            [new class(false) extends BooleanValue {}, false],
-            [new class(1) extends IntegerValue {}, false],
-            [new class(0) extends IntegerValue {}, false],
-            [new class('true') extends StringValue {}, false],
-            [new class('false') extends StringValue {}, false],
+            [
+                new class (true) extends BooleanValue {
+                },
+                true,
+            ],
+            [
+                new class (false) extends BooleanValue {
+                },
+                false,
+            ],
+            [
+                new class (1) extends IntegerValue {
+                },
+                false,
+            ],
+            [
+                new class (0) extends IntegerValue {
+                },
+                false,
+            ],
+            [
+                new class ('true') extends StringValue {
+                },
+                false,
+            ],
+            [
+                new class ('false') extends StringValue {
+                },
+                false,
+            ],
         ];
     }
 }

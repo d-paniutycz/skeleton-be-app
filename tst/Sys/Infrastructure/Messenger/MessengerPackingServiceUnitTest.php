@@ -26,7 +26,8 @@ class MessengerPackingServiceUnitTest extends UnitTest
     public function testAsyncMessagesStampedForDispatchAfterCurrentBus(): void
     {
         // arrange
-        $message = new class implements MessengerMessage, AsyncMessage {};
+        $message = new class implements MessengerMessage, AsyncMessage {
+        };
 
         // act
         $result = $this->subject->pack($message);
@@ -39,7 +40,8 @@ class MessengerPackingServiceUnitTest extends UnitTest
     public function testSyncMessagesHaveSyncTransportStamp(): void
     {
         // arrange
-        $message = new class implements MessengerMessage {};
+        $message = new class implements MessengerMessage {
+        };
 
         // act
         $result = $this->subject->pack($message);
@@ -59,10 +61,13 @@ class MessengerPackingServiceUnitTest extends UnitTest
         $message = 'test';
 
         $stack = new HandlerFailedException(
-            $envelope, [new InvalidArgumentException($message)]
+            $envelope,
+            [new InvalidArgumentException($message)],
         );
+
         $stack = new HandlerFailedException(
-            $envelope, [$stack]
+            $envelope,
+            [$stack],
         );
 
         // act

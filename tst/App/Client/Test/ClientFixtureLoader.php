@@ -15,6 +15,7 @@ use Sys\Domain\Value\Role;
 class ClientFixtureLoader
 {
     // @TODO: Pajet my son you have failed, use the password generator interface per env next time
+    // phpcs:ignore
     private string $password = '$argon2id$v=19$m=65536,t=4,p=1$dnBaR3NUWDh5TDhDNWhvSA$X9F6iWvK32OVvSEFPXZDJ8NoHhqgSyTbABf8lO0egRU';
 
     public function __construct(

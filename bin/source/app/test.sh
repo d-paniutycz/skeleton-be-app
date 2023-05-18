@@ -98,7 +98,7 @@ run_phpmd() {
   assert_binary_is_executable "$binary"
   assert_file_exists "$config"
 
-  exec_php $(which "$binary") "src/" ansi "$config"
+  exec_php $(which "$binary") "src/,tst/" ansi "$config"
 }
 
 run_phpcs() {
@@ -108,7 +108,7 @@ run_phpcs() {
   assert_binary_is_executable "$binary"
   assert_file_exists "$config"
 
-  exec_php $(which "$binary") "src/" --standard="$config" --no-cache
+  exec_php $(which "$binary") "src/" "tst/" --standard="$config" --no-cache
 }
 
 run_psalm() {

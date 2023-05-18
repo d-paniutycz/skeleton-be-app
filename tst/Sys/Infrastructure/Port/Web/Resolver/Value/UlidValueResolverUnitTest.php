@@ -42,7 +42,8 @@ class UlidValueResolverUnitTest extends UnitTest
         // arrange
         $ulid = Ulid::generate();
 
-        $proxy = new class($ulid) extends UlidValue {};
+        $proxy = new class ($ulid) extends UlidValue {
+        };
 
         $attributes = self::createStub(ParameterBag::class);
         $attributes->method('get')->willReturn($ulid);

@@ -39,7 +39,7 @@ class ApiProblemResponseBuilderUnitTest extends UnitTest
         // arrange
         $statusCode = 404;
 
-        $exception = new class($statusCode) extends ApplicationException {
+        $exception = new class ($statusCode) extends ApplicationException {
             public function __construct(private readonly int $statusCode)
             {
             }

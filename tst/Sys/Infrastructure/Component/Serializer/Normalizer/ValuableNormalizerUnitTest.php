@@ -22,7 +22,8 @@ class ValuableNormalizerUnitTest extends UnitTest
     {
         // arrange
         $value = 'test';
-        $proxy = new class($value) extends StringValue {};
+        $proxy = new class ($value) extends StringValue {
+        };
 
         // act
         $result = $this->subject->denormalize($value, get_class($proxy));

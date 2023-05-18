@@ -28,9 +28,19 @@ class RoleUnitTest extends UnitTest
     public static function valuableProvider(): array
     {
         return [
-            [new class(Role::REGULAR->getValue()) extends StringValue {}, true],
-            [Role::REGULAR, true],
-            [Role::MASTER, false],
+            [
+                new class (Role::REGULAR->getValue()) extends StringValue {
+                },
+                true,
+            ],
+            [
+                Role::REGULAR,
+                true,
+            ],
+            [
+                Role::MASTER,
+                false,
+            ],
         ];
     }
 }

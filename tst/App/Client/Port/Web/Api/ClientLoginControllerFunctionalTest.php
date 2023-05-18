@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sys\Domain\Value\Role;
 use Sys\Infrastructure\Test\Type\FunctionalTest;
 
-class ClientLoginControllerFunctionalTest  extends FunctionalTest
+class ClientLoginControllerFunctionalTest extends FunctionalTest
 {
     private readonly ClientFixtureLoader $clientLoader;
 

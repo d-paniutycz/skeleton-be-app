@@ -17,13 +17,15 @@ class UlidValueUnitTest extends UnitTest
         self::expectException(InputStringValueException::class);
 
         // act
-        new class($input) extends UlidValue {};
+        new class ($input) extends UlidValue {
+        };
     }
 
     public function testGeneratedUlidIsValid(): void
     {
         // arrange
-        $proxy = new class(Ulid::generate()) extends UlidValue {};
+        $proxy = new class (Ulid::generate()) extends UlidValue {
+        };
 
         // act
         $subject = $proxy::generate();

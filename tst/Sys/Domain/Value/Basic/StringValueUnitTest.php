@@ -15,7 +15,8 @@ class StringValueUnitTest extends UnitTest
 
     protected function setUp(): void
     {
-        $this->subject = new class('true') extends StringValue {};
+        $this->subject = new class ('true') extends StringValue {
+        };
     }
 
     #[DataProvider('valuableProvider')]
@@ -49,10 +50,26 @@ class StringValueUnitTest extends UnitTest
     public static function valuableProvider(): array
     {
         return [
-            [new class('true') extends StringValue {}, true],
-            [new class('1') extends StringValue {}, false],
-            [new class(1) extends IntegerValue {}, false],
-            [new class(true) extends BooleanValue {}, false],
+            [
+                new class ('true') extends StringValue {
+                },
+                true,
+            ],
+            [
+                new class ('1') extends StringValue {
+                },
+                false,
+            ],
+            [
+                new class (1) extends IntegerValue {
+                },
+                false,
+            ],
+            [
+                new class (true) extends BooleanValue {
+                },
+                false,
+            ],
         ];
     }
 }

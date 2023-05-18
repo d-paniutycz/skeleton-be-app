@@ -25,7 +25,8 @@ class MessengerQueryBusUnitTest extends UnitTest
     public function testExceptionThrownOnAsyncQueryMessage(): void
     {
         // arrange
-        $message = new class implements QueryMessage, AsyncMessage {};
+        $message = new class implements QueryMessage, AsyncMessage {
+        };
 
         // assert
         self::expectException(RuntimeException::class);

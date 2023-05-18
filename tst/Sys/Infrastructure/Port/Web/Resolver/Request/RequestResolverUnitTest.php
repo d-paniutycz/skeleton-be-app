@@ -52,7 +52,7 @@ class RequestResolverUnitTest extends UnitTest
         $strategy = self::createStub(RequestResolverStrategy::class);
         $strategy->method('resolve')->willReturn([]);
 
-        $proxy = new class($strategy) implements ResolvableRequest {
+        $proxy = new class ($strategy) implements ResolvableRequest {
             private static RequestResolverStrategy $strategy;
 
             public function __construct(RequestResolverStrategy $strategy)

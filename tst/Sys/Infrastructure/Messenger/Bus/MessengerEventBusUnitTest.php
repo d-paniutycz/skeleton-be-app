@@ -32,7 +32,7 @@ class MessengerEventBusUnitTest extends UnitTest
         // arrange
         $event = self::createStub(EventMessage::class);
 
-        $root = new class($event) extends AggregateRoot {
+        $root = new class ($event) extends AggregateRoot {
             public function __construct(EventMessage $event)
             {
                 $this->pushEvent($event);

@@ -19,7 +19,8 @@ class HashedSecretValueUnitTest extends UnitTest
     public function testHashedSecretIsValid(): void
     {
         // arrange
-        $proxy = new class(self::$secretHash) extends HashedSecretValue {};
+        $proxy = new class (self::$secretHash) extends HashedSecretValue {
+        };
 
         // act
         $subject = $proxy::hash(self::$secretText);
@@ -36,6 +37,7 @@ class HashedSecretValueUnitTest extends UnitTest
         self::expectException(InputStringValueException::class);
 
         // act
-        new class('invalid hash') extends HashedSecretValue {};
+        new class ('invalid hash') extends HashedSecretValue {
+        };
     }
 }

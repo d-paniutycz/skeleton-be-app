@@ -14,7 +14,7 @@ class AggregateRootUnitTest extends UnitTest
         $eventA = self::createStub(EventMessage::class);
         $eventB = self::createStub(EventMessage::class);
 
-        $subject = new class($eventA, $eventB) extends AggregateRoot {
+        $subject = new class ($eventA, $eventB) extends AggregateRoot {
             public function __construct(EventMessage $eventA, EventMessage $eventB)
             {
                 $this->pushEvent($eventA);

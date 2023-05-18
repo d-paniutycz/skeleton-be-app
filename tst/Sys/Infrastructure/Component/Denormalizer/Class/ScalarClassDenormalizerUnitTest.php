@@ -65,10 +65,26 @@ class ScalarClassDenormalizerUnitTest extends UnitTest
     public static function wrongTypedProxyProvider(): array
     {
         return [
-            [new class { public int|string $value; }], // union
-            [new class { public IteratorAggregate&Generator $value; }], // intersection
-            [new class { public $value; }], // missing type
-            [new class { public stdClass $value; }], // not builtin
+            [
+                new class {
+                    public int|string $value; // union
+                }
+            ],
+            [
+                new class {
+                    public IteratorAggregate&Generator $value; // intersection
+                }
+            ],
+            [
+                new class {
+                    public $value; // missing type
+                }
+            ],
+            [
+                new class {
+                    public stdClass $value; // not builtin
+                }
+            ],
         ];
     }
 }

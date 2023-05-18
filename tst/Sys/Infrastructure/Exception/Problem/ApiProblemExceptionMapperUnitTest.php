@@ -22,6 +22,11 @@ class ApiProblemExceptionMapperUnitTest extends UnitTest
             public string $secret = 'secret';
             public string $public = 'public';
             private string $private = 'private';
+
+            public function getPrivate(): string
+            {
+                return $this->private;
+            }
         };
 
         // act

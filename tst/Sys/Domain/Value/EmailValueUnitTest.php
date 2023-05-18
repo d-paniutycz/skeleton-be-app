@@ -16,13 +16,15 @@ class EmailValueUnitTest extends UnitTest
         self::expectException(InputStringValueException::class);
 
         // act
-        new class($input) extends EmailValue {};
+        new class ($input) extends EmailValue {
+        };
     }
 
     public function testValueCanBeCreatedFromValidInput(): void
     {
         // act
-        new class('email@test.com') extends EmailValue {};
+        new class ('email@test.com') extends EmailValue {
+        };
 
         // assert
         self::assertTrue(true);
