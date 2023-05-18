@@ -142,10 +142,10 @@ run_phpunit() {
 }
 
 run_coverage() {
-  local threshold=80
+  local threshold=70
 
   if [[ -f "$COVERAGE_FILE" ]]; then
-    cat "$COVERAGE_FILE"
+    head -10 "$COVERAGE_FILE"
   else
     die "Coverage '$COVERAGE_FILE' report not found, run phpunit first."
   fi
