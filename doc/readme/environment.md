@@ -1,8 +1,3 @@
-## Requirements
-
-- Docker Engine >=20.10
-- Docker Compose >=2.17
-
 ## Environment
 `bin/env --help`
 
@@ -80,4 +75,4 @@ services:
 
 Each environment has its own dotenv configuration. In the case of production environments, all secrets are stored in a repository responsible for deploying individual services.
 
-During deployment, the placeholders for example `APP_SECRET=${APP_SECRET}` from the dotenv file, will be automatically replaced with the appropriate secret value specific to the environment, stored in [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+During deployment, the placeholders e.g. `APP_SECRET=${APP_SECRET}` from the dotenv file, will be automatically replaced with the appropriate secret value specific to the environment, stored in [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
