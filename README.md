@@ -1,8 +1,8 @@
 ## Cel
 Celem tego repozytorium jest przygotowanie szkieletu aplpikacji backendowej zawierajacej wszystkie narzedzia niezbedne do developmentu, testowania i procesow CI/CD.
 
-## Spis tresci
-1) Srodowisko (konfiguracja, uruchamianie)
-2) Applikacja (testowanie, inicjlizacja)
+## Table of contents
+1) [Environment](doc/readme/environment.md)
+2) [Application](doc/readme/application.md)
 3) Framework
-4) Releases (builds, deployments)
+4) Releases

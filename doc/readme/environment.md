@@ -1,8 +1,11 @@
 ## Requirements
+
 - Docker Engine >=20.10
 - Docker Compose >=2.17
 
 ## Environment
+`bin/env --help`
+
 The environment can be managed using the `bin/env` script or directly through `docker compose` from the **host** machine.
 The complete environment configuration consists of combining all the configuration files together, depending on the desired `<env>`.
 
@@ -23,7 +26,7 @@ Example of `docker ps`:
 | 9000/tcp               | skeleton-tst-be-app-php-1 |
 | 0.0.0.0:5433->5432/tcp | skeleton-tst-be-app-pg1-1 |
 
-Environments are divided into two groups, the `tech` group contains testing and development tools while `live` is intended to be ready as a base image for release builds.
+PHP service images are divided into two groups, the `tech` group contains testing and development tools while `live` is intended to be ready as a base image for release builds.
 
 | env name | php image | xdebug | opcache | apcu | quality tools |
 |----------|-----------|:------:|:-------:|:----:|:-------------:|
@@ -72,6 +75,7 @@ services:
 ```
 
 ## Config: dotenv
+
 `./etc/config/dotenv/.env.<env>`
 
 Each environment has its own dotenv configuration. In the case of production environments, all secrets are stored in a repository responsible for deploying individual services.
