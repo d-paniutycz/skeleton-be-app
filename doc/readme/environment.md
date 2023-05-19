@@ -13,6 +13,24 @@ For example, the `dev` environment can be started with the command:
 
 Multiple environments can exist on a single host, but care should be taken regarding potential networking conflicts and missing external services.
 
+Example of `docker ps`:
+
+| PORTS                  | NAMES                     |
+|------------------------|---------------------------|
+| 0.0.0.0:80->80/tcp     | skeleton-dev-be-app-web-1 |
+| 9000/tcp               | skeleton-dev-be-app-php-1 |
+| 0.0.0.0:5432->5432/tcp | skeleton-dev-be-app-pg1-1 |
+| 9000/tcp               | skeleton-tst-be-app-php-1 |
+| 0.0.0.0:5433->5432/tcp | skeleton-tst-be-app-pg1-1 |
+
+Environments are divided into two groups, the `tech` group contains testing and development tools while `live` is intended to be ready as a base image for release builds.
+
+| env name | php image | xdebug | opcache | apcu | quality tools |
+|----------|-----------|:------:|:-------:|:----:|:-------------:|
+| dev      | tech      |   ✓    |    -    |  -   |       ✓       |
+| tst      | tech      |   ✓    |    -    |  -   |       ✓       |
+| stg      | live      |   -    |    ✓    |  ✓   |       -       |
+
 ## Config: Compose
 
 `./docker-compose.yaml`
@@ -58,4 +76,4 @@ services:
 
 Each environment has its own dotenv configuration. In the case of production environments, all secrets are stored in a repository responsible for deploying individual services.
 
-During deployment, the placeholder value `APP_SECRET=${APP_SECRET}` from the dotenv file will be automatically replaced with the appropriate secret value specific to the environment, and stored in [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+During deployment, the placeholders for example `APP_SECRET=${APP_SECRET}` from the dotenv file, will be automatically replaced with the appropriate secret value specific to the environment, stored in [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
