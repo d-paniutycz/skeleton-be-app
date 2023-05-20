@@ -98,7 +98,7 @@ curl --request GET \
   --url http://127.0.0.1/api/v1/client/01H0WHQA9AVR19484F2AHMP3Y4
 ```
 
-### 2) VO injection
+### 2) Value injection
 ```php
 #[Route(path: '/api/v1/client']
 final class ClientController extends WebController
@@ -112,4 +112,37 @@ final class ClientController extends WebController
 }
 ```
 
-## Feature: Api Problem generator
+## Feature: Api Problem
+All exceptions that inherit from `ApplicationException` will be automatically converted to an API Problem response and returned as a `problem+json` response with the appropriate status code. Each other exception will result in an anonymized response with a status code of 500.
+
+### 1) Application exception
+```php
+class InsufficientRoleException extends ApplicationException
+{
+    public function __construct(
+        public readonly Role $currentRole,
+    ) {
+        parent::__construct('Insufficient role to access this resource.');
+    }
+
+    public function getStatusCode(): int
+    {
+        return Response::HTTP_FORBIDDEN;
+    }
+}
+```
+The default status code for the API Problem response is 400. However, you can override the `getStatusCode` method to change it to a different value. Additionally, all public properties will be included in the response as additional problem information.
+
+### 2) Response problem+json
+```json
+{
+	"type": "urn:id:706337496",
+	"title": "Insufficient role exception",
+	"detail": "Insufficient role to access this resource.",
+	"status": 403,
+	"additional": {
+		"currentRole": "ROLE_REGULAR"
+	}
+}
+```
+The Api Problem `type` is constructed by calculating the CRC32 checksum of the exception's namespace. Therefore, it represents a unique type across the entire application, even though the exception may be thrown in multiple places.

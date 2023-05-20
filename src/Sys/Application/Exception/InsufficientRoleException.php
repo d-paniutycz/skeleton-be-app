@@ -11,7 +11,7 @@ use Sys\Infrastructure\Exception\Abstract\ApplicationException;
 class InsufficientRoleException extends ApplicationException
 {
     public function __construct(
-        public Role $currentRole,
+        public readonly Role $currentRole,
     ) {
         parent::__construct('Insufficient role to access this resource.');
     }
