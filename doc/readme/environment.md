@@ -21,6 +21,9 @@ Example of `docker ps`:
 | 9000/tcp               | skeleton-tst-be-app-php-1 |
 | 0.0.0.0:5433->5432/tcp | skeleton-tst-be-app-pg1-1 |
 
+## Images
+The entire environment, especially during deployment, assumes the use of baked images. Each image must be ready to run without mounting external volumes, e.g. with configuration stored in files.
+
 PHP service images are divided into two groups, the `tech` group contains testing and development tools while `live` is intended to be ready as a base image for release builds.
 
 | env name | php image | xdebug | opcache | apcu | quality tools |
@@ -28,6 +31,8 @@ PHP service images are divided into two groups, the `tech` group contains testin
 | dev      | tech      |   ✓    |    -    |  -   |       ✓       |
 | tst      | tech      |   ✓    |    -    |  -   |       ✓       |
 | stg      | live      |   -    |    ✓    |  ✓   |       -       |
+
+The [skeleton-docker](https://github.com/d-paniutycz/skeleton-docker) repository handles the building and versioning of these images. The only exception is the release image, which is built within this repository.
 
 ## Config: Compose
 

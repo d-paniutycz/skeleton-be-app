@@ -1,5 +1,5 @@
 ## Purpose
-The purpose of this repository is to provide a skeleton for a backend application that includes all the necessary tools for development, testing, and CI/CD processes. This repository works in conjunction with the [central repository](https://github.com/d-paniutycz/skeleton-docker).
+The purpose of this repository is to provide a skeleton for a backend application that includes all the necessary tools for development, testing, and CI/CD processes. This repository works in conjunction with the [skeleton-docker](https://github.com/d-paniutycz/skeleton-docker) repository.
 
 ## Requirements
 - Docker Compose >=2.17
@@ -8,9 +8,9 @@ The purpose of this repository is to provide a skeleton for a backend applicatio
 - Git
 
 ## Table of contents
-1) [Environment](doc/readme/environment.md)
-2) [Application](doc/readme/application.md)
-3) [Framework](doc/readme/framework.md)
+1) [Environment](doc/readme/environment.md): images, configs
+2) [Application](doc/readme/application.md): testing, debugging, releasing
+3) [Framework](doc/readme/framework.md): flow, features
 
 ## Quick start
 ### 1) Clone
