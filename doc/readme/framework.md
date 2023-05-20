@@ -6,6 +6,15 @@ To access the Symfony console, execute the command `bin/app exec` command direct
 ## Framework: Flow
 ![](/doc/readme/img/framework-flow.png)
 
+### 1) Database
+
+Using CQRS encourages separating database connections into read-only and read/write connections. By separating connections, it enables future replication of the database when vertical scaling is no longer feasible. Data replication between databases should occur synchronously, for example, using Write Ahead Log (PostgreSQL).
+
+Using two different connections for Query and Command poses a challenge when reading data that is currently in a transaction. In such cases, when an active transaction is detected, the Read Model will utilize the read/write connection.
+
+### 2) Async outbox
+
+### 3) Events
 
 ## Feature: Guard
 The basic functionality of `isGranted` is not sufficient. To enable more flexible access control, a `Guard` attribute has been created, allowing easy implementation of any ACL logic through strategies. The basic access control strategy is the `GuardRole`.
@@ -113,7 +122,7 @@ final class ClientController extends WebController
 ```
 
 ## Feature: Api Problem
-All exceptions that inherit from `ApplicationException` will be automatically converted to an API Problem response and returned as a `problem+json` response with the appropriate status code. Each other exception will result in an anonymized response with a status code of 500.
+All exceptions that inherit from `ApplicationException` will be automatically converted to an API Problem response and returned as a `problem+json` response with the appropriate status code. Each other uncaught exception will result in an anonymized response with a status code of 500.
 
 ### 1) Application exception
 ```php
@@ -146,3 +155,5 @@ The default status code for the API Problem response is 400. However, you can ov
 }
 ```
 The Api Problem `type` is constructed by calculating the CRC32 checksum of the exception's namespace. Therefore, it represents a unique type across the entire application, even though the exception may be thrown in multiple places with different detail (exception) message.
+
+_...There is more, check the source code by yourself!_
