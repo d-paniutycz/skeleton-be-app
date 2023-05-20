@@ -1,5 +1,5 @@
-## Cel
-Celem tego repozytorium jest przygotowanie szkieletu aplpikacji backendowej zawierajacej wszystkie narzedzia niezbedne do developmentu, testowania i procesow CI/CD.
+## Purpose
+The purpose of this repository is to provide a skeleton for a backend application that includes all the necessary tools for development, testing, and CI/CD processes. This repository works in conjunction with the [central repository](https://github.com/d-paniutycz/skeleton-docker).
 
 ## Requirements
 - Docker Compose >=2.17
@@ -11,7 +11,6 @@ Celem tego repozytorium jest przygotowanie szkieletu aplpikacji backendowej zawi
 1) [Environment](doc/readme/environment.md)
 2) [Application](doc/readme/application.md)
 3) [Framework](doc/readme/framework.md)
-4) Releases
 
 ## Quick start
 ### 1) Clone
