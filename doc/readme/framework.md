@@ -7,14 +7,12 @@ To access the Symfony console, execute the command `bin/app exec` command direct
 ![](/doc/readme/img/framework-flow.png)
 
 ### 1) Database
+Using CQRS encourages separating database connections into read-only and read/write connections. By separating connections, it enables future replication of the database when vertical scaling is no longer feasible. Data replication between databases should occur synchronously, for example using Write Ahead Log (PostgreSQL).
 
-Using CQRS encourages separating database connections into read-only and read/write connections. By separating connections, it enables future replication of the database when vertical scaling is no longer feasible. Data replication between databases should occur synchronously, for example, using Write Ahead Log (PostgreSQL).
+Using two different connections for Query and Command poses a challenge when reading data that is currently in a transaction. In such cases, when an active transaction is detected, the Read Model will utilize the read/write instead of default read only connection.
 
-Using two different connections for Query and Command poses a challenge when reading data that is currently in a transaction. In such cases, when an active transaction is detected, the Read Model will utilize the read/write connection.
-
-### 2) Async outbox
-
-### 3) Events
+### 2) Async messages
+All messages that implement the `AsyncMessage` interface are routed to the asynchronous transport of the Messenger component. Additionally, they are marked with the `DispatchAfterCurrentBusStamp` stamp. This ensures that the messages will not be sent if an error occurs during the execution of the current bus message stack.
 
 ## Feature: Guard
 The basic functionality of `isGranted` is not sufficient. To enable more flexible access control, a `Guard` attribute has been created, allowing easy implementation of any ACL logic through strategies. The basic access control strategy is the `GuardRole`.
