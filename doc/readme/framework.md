@@ -7,7 +7,7 @@ To access the Symfony console, execute the command `bin/app exec` command direct
 ![](/doc/readme/img/framework-flow.png)
 
 ### 1) Database
-Using CQRS encourages separating database connections into read-only and read/write connections. By separating connections, it enables future replication of the database when vertical scaling is no longer feasible. Data replication between databases should occur synchronously, for example using Write Ahead Log (PostgreSQL).
+Using CQRS encourages separating database connections into read-only and read/write connections. By separating connections, it enables future replication of the database when vertical scaling is no longer feasible. Data replication between databases should occur synchronously, for example using Write Ahead Log in PostgreSQL.
 
 Using two different connections for Query and Command poses a challenge when reading data that is currently in a transaction. In such cases, when an active transaction is detected, the Read Model will utilize the read/write instead of default read only connection.
 
@@ -154,4 +154,4 @@ The default status code for the API Problem response is 400. However, you can ov
 ```
 The Api Problem `type` is constructed by calculating the CRC32 checksum of the exception's namespace. Therefore, it represents a unique type across the entire application, even though the exception may be thrown in multiple places with different detail (exception) message.
 
-_...There is more, check the source code by yourself!_
+_...there is more, check the source code by yourself!_
