@@ -20,7 +20,7 @@ final class ClientController extends WebController
         // ...
     }
 
-    // role guard, only clients with master role are allowed
+    // role guard, only clients with master or moderator role are allowed
     #[Guard(new GuardRoleAny(Role::MASTER))]
     #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
     public function read(ClientId $clientId): Response
@@ -38,6 +38,8 @@ final class ClientController extends WebController
 }
 ```
 
-## Feature: Resolver
+An endpoint can be guarded by multiple strategies, and each strategy must express consent for access. You can implement new strategies using the `GuardStrategy` interface, but since attributes are not part of the container, you need to ensure that the necessary dependencies (DI) are provided.
 
-## Feature: ApiProblem
+## Feature: Request resolver
+
+## Feature: Api Problem generator
