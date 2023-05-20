@@ -131,7 +131,7 @@ class InsufficientRoleException extends ApplicationException
     }
 }
 ```
-The default status code for the API Problem response is 400. However, you can override the `getStatusCode` method to change it to a different value. Additionally, all public properties will be included in the response as additional problem information.
+The default status code for the API Problem response is 400. However, you can override the `getStatusCode` method to change it to a different value. Additionally, all **public** properties will be included in the response as additional problem information.
 
 ### 2) Response problem+json
 ```json
@@ -145,4 +145,4 @@ The default status code for the API Problem response is 400. However, you can ov
 	}
 }
 ```
-The Api Problem `type` is constructed by calculating the CRC32 checksum of the exception's namespace. Therefore, it represents a unique type across the entire application, even though the exception may be thrown in multiple places.
+The Api Problem `type` is constructed by calculating the CRC32 checksum of the exception's namespace. Therefore, it represents a unique type across the entire application, even though the exception may be thrown in multiple places with different detail (exception) message.
