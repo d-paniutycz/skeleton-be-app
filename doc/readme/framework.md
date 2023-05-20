@@ -73,7 +73,7 @@ readonly class ClientCreateInput implements ResolvableRequest
 ```
 The `ResolvableRequest` interface enforces the requirement to specify a strategy that determines how we want to extract data from the request. In this case, the data source for the DTO is the content encoded in JSON. Implementing other strategies is possible using the `RequestResolverStrategy` interface.
 
-### 3) Input DTO usage
+### 3) Input DTO injection
 ```php
 #[Route(path: '/api/v1/client']
 final class ClientController extends WebController
@@ -83,11 +83,33 @@ final class ClientController extends WebController
     {
         echo $createInput->username;
         echo $createInput->password;
+        // ...
     }
 }
 ```
 The data received in the controller action, based on the type hint `ClientCreateInput`, is automatically validated against the rules defined in the DTO and can be used in further program logic.
 
-## Feature: Value resolver
+## Feature: ID resolver
+All objects that store IDs and inherit from `UlidValue` are automatically resolved to their respective types directly from the URL path.
+
+### 1) HTTP Request
+```shell
+curl --request GET \
+  --url http://127.0.0.1/api/v1/client/01H0WHQA9AVR19484F2AHMP3Y4
+```
+
+### 2) VO injection
+```php
+#[Route(path: '/api/v1/client']
+final class ClientController extends WebController
+{
+    #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
+    public function read(ClientId $clientId): Response
+    {
+        echo $clientId->getValue();
+        // ...
+    }
+}
+```
 
 ## Feature: Api Problem generator
