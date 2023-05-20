@@ -8,7 +8,7 @@ To access the Symfony console, execute the command `bin/app exec` command direct
 
 
 ## Feature: Guard
-The basic functionality of `isGranted` is not sufficient. To enable more flexible access control, a `Guard` attribute has been created, allowing easy implementation of any ACL logic through strategies. The basic access control strategy is the `GuardRole`. Here are a few usage examples:
+The basic functionality of `isGranted` is not sufficient. To enable more flexible access control, a `Guard` attribute has been created, allowing easy implementation of any ACL logic through strategies. The basic access control strategy is the `GuardRole`.
 
 ```php
 final class ClientController extends WebController
@@ -20,7 +20,7 @@ final class ClientController extends WebController
         // ...
     }
 
-    // role guard, only clients with master or moderator role are allowed
+    // any role guard, only clients with master role are allowed
     #[Guard(new GuardRoleAny(Role::MASTER))]
     #[Route(path: '/{clientId}', methods: Request::METHOD_GET)]
     public function read(ClientId $clientId): Response
@@ -41,5 +41,53 @@ final class ClientController extends WebController
 An endpoint can be guarded by multiple strategies, and each strategy must express consent for access. You can implement new strategies using the `GuardStrategy` interface, but since attributes are not part of the container, you need to ensure that the necessary dependencies (DI) are provided.
 
 ## Feature: Request resolver
+Every HTTP request can be automatically resolved into a DTO that implements the `ResolveableRequest` interface. Optionally, the data can also be validated against a set of assertion rules.
+
+### 1) HTTP Request
+```shell
+curl --request POST \
+  --url http://127.0.0.1/api/v1/client \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"username": "username",
+	"password": "password"
+  }'
+```
+
+### 2) Input DTO
+```php
+readonly class ClientCreateInput implements ResolvableRequest
+{
+    #[Assert\Type('alnum')]
+    #[Assert\Length(min: 8, max: 32)]
+    public string $username;
+
+    #[Assert\Length(min: 8, max: 32)]
+    public string $password;
+
+    public static function getRequestResolver(): RequestResolverStrategy
+    {
+        return new JsonContentResolverStrategy();
+    }
+}
+```
+The `ResolvableRequest` interface enforces the requirement to specify a strategy that determines how we want to extract data from the request. In this case, the data source for the DTO is the content encoded in JSON. Implementing other strategies is possible using the `RequestResolverStrategy` interface.
+
+### 3) Input DTO usage
+```php
+#[Route(path: '/api/v1/client']
+final class ClientController extends WebController
+{
+    #[Route(path: null, methods: Request::METHOD_POST)]
+    public function create(ClientCreateInput $createInput): Response
+    {
+        echo $createInput->username;
+        echo $createInput->password;
+    }
+}
+```
+The data received in the controller action, based on the type hint `ClientCreateInput`, is automatically validated against the rules defined in the DTO and can be used in further program logic.
+
+## Feature: Value resolver
 
 ## Feature: Api Problem generator
